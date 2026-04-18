@@ -1,0 +1,25 @@
+{
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": true,
+      "id": "1"
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": false,
+      "id": "2"
+    },
+    {
+      "content": "holaa",
+      "important": true,
+      "id": "0y7V4VNFnfk"
+    },
+    {
+      "content": "hola bb",
+      "important": true,
+      "id": "N3pbPtfsqNg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
