@@ -29,4 +29,17 @@ const createNew = async (content) => {
   return await response.json()
 }
 
-export default { getAll, createNew }
+const voteAnecdotes = async (vote, id) => {
+  const response = await fetch(`${baseUrl}/${id}`,{
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({votes: vote+1}),
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to added vote')
+  }
+  return await response.json()
+}
+
+export default { getAll, createNew, voteAnecdotes }
