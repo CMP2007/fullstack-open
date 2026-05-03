@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
+import {
+  BrowserRouter as Router,
+  Routes, Route, Link
+} from 'react-router-dom'
 import BlogsList from './Components/BlogsList'
 import Blogs from './services/blogs'
 import Login from './Components/login'
@@ -8,7 +12,6 @@ import createBlog from './services/CreateBlog'
 import  chageBlogs from './services/changeBlogs'
 import deletedBlogs from './services/deletedBlogs'
 import Notification from './Components/alerts'
-import Togglable from './Components/Togglable'
 import './index.css'
 
 const App = () => {
@@ -16,16 +19,17 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [notification, setNotification] = useState({ text:null, style:null })
 
+  console.log(blogs);
+  
+
   const blogRef  = useRef()
 
   useEffect(() => {
-    if (user) {
-      Blogs
-        .getAll()
-        .then( response => {
-          setBlogs(response)
-        })
-    }
+    Blogs
+      .getAll()
+      .then( response => {
+        setBlogs(response)
+      })
   },[user])
 
   useEffect(() => {
@@ -112,40 +116,39 @@ const App = () => {
     }
   }
 
+  const padding = {
+    padding: 5
+  }
 
   const closeSession = () => {
     window.localStorage.removeItem('loggedBlogUser')
     setUser(null)
   }
 
-  const display = user => {
-    if (!user) {
-      return(
-        <>
-          <h1>log in to application</h1>
-          <Notification message = {notification.text} style={notification.style}/>
-          <Login handlLogin={handlLogin}/>
-        </>
-      )
-    } else {
-      return(
-        <>
-          <h1>blogs</h1>
-          <Notification message = {notification.text} style={notification.style}/>
-          <b>{user.name} logged in </b>
-          <button onClick={closeSession}>logout</button>
-          <Togglable buttonLabel="create new blog" ref={blogRef} >
-            <BlogsForm handlBlog={handlBlog}/>
-          </Togglable>
-          <BlogsList blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user} />
-        </>
-      )
-    }
-  }
-
   return (
     <>
-      {display(user)}
+      <Router>
+        <div>
+          <Link style={padding} to="/">Blogs</Link>
+          {user 
+            ? <button onClick={closeSession}>logout</button>
+            : <Link style={padding} to="/login">Login</Link> 
+          }
+        </div>
+
+        <Notification message = {notification.text} style={notification.style}/>
+
+        <Routes>
+          <Route path='/' element={
+            <BlogsList blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user} />
+          } />
+          <Route path='/login' element={
+            <Login handlLogin={handlLogin}/>
+          } />
+        </Routes>
+      </Router>
+
+      {/* <BlogsForm handlBlog={handlBlog}/> */}
     </>
   )
 }

@@ -28,6 +28,7 @@ const TogglableBlogs = ({ blog, putBlogs, deleted, user }) => {
         </>
       )
     } else {
+      console.log(user);
       return null
     }
   }
@@ -39,7 +40,7 @@ const TogglableBlogs = ({ blog, putBlogs, deleted, user }) => {
     borderWidth: 1,
     marginBottom: 5
   }
-
+  
   return (
     <>
       <div style={blogStyle} data-testid='blog-item'>
@@ -50,7 +51,7 @@ const TogglableBlogs = ({ blog, putBlogs, deleted, user }) => {
           <span className='likes-count'>{blog.likes}</span>
           <button onClick={() => putBlogs(blog)}>like</button><br />
           {blog.author} <br />
-          {hidenDelete()}
+          {user?hidenDelete() :null}
         </div>
       </div>
     </>
