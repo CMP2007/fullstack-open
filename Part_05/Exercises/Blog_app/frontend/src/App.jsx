@@ -12,6 +12,7 @@ import createBlog from './services/CreateBlog'
 import  chageBlogs from './services/changeBlogs'
 import deletedBlogs from './services/deletedBlogs'
 import Notification from './Components/alerts'
+import Blog from './Components/Blog'
 import './index.css'
 
 const App = () => {
@@ -139,15 +140,17 @@ const App = () => {
         <Notification message = {notification.text} style={notification.style}/>
 
         <Routes>
+          <Route path="/blogs/:id" element={
+            <Blog blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user}/>
+          } />
           <Route path='/' element={
-            <BlogsList blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user} />
+            <BlogsList blogs={blogs} />
           } />
           <Route path='/login' element={
             <Login handlLogin={handlLogin}/>
           } />
         </Routes>
       </Router>
-
       {/* <BlogsForm handlBlog={handlBlog}/> */}
     </>
   )

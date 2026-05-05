@@ -1,7 +1,6 @@
-import TogglableBlogs from './TogglableBlogs'
-import Notification from './alerts'
+import { Link } from 'react-router-dom'
 
-const BlogsList = ({ blogs, putBlogs, deleted, user }) => {
+const BlogsList = ({ blogs }) => {
   const blogsSort = [...blogs].sort(function (a, b) {
     return  b.likes - a.likes
   })
@@ -10,15 +9,13 @@ const BlogsList = ({ blogs, putBlogs, deleted, user }) => {
     <>
       <h1>blogs</h1>
       <div data-testid='blog-list'>
-        {blogsSort.map(blog =>
-          <TogglableBlogs
-            blog={blog}
-            key={blog.id}
-            putBlogs={putBlogs}
-            deleted={deleted}
-            user={user}
-          />
+        <ul>
+          {blogsSort.map(blog =>
+          <li key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+          </li>
         )}
+        </ul>
       </div>
     </>
   )
