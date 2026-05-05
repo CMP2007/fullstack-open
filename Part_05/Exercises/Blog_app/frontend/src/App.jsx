@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Routes, Route, Link
@@ -19,11 +19,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
   const [notification, setNotification] = useState({ text:null, style:null })
-
-  console.log(blogs);
-  
-
-  const blogRef  = useRef()
 
   useEffect(() => {
     Blogs
@@ -60,7 +55,6 @@ const App = () => {
 
   const handlBlog = async (newBlog) => {
     try{
-      blogRef.current.toggleVisibility()
       const response = await createBlog.CreateBlogs(newBlog, user.token)
       setBlogs(blogs.concat(response))
       setNotification({ text:`a new blog ${response.title} by ${response.author} added`, style:'alert' })
@@ -132,7 +126,10 @@ const App = () => {
         <div>
           <Link style={padding} to="/">Blogs</Link>
           {user 
-            ? <button onClick={closeSession}>logout</button>
+            ? <>
+                <Link style={padding} to="/newBlog">new blog</Link> 
+                <button onClick={closeSession}>logout</button>
+              </> 
             : <Link style={padding} to="/login">Login</Link> 
           }
         </div>
@@ -146,12 +143,14 @@ const App = () => {
           <Route path='/' element={
             <BlogsList blogs={blogs} />
           } />
+          <Route path='newBlog' element={
+            <BlogsForm handlBlog={handlBlog}/>
+          } />
           <Route path='/login' element={
             <Login handlLogin={handlLogin}/>
           } />
         </Routes>
       </Router>
-      {/* <BlogsForm handlBlog={handlBlog}/> */}
     </>
   )
 }

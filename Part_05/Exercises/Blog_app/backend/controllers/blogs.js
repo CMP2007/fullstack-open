@@ -27,6 +27,8 @@ blogsRouter.post('/', middleware.getUser, async (request, response) => {
     return response.status(400).json({ error: 'content missing' })
   }
   const savedBlog = await blog.save()
+
+  await savedBlog.populate('user', {username: 1, name: 1, _id: 1})
   
   userDefect.blogs = userDefect.blogs.concat(savedBlog._id)
   await userDefect.save()
