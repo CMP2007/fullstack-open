@@ -119,6 +119,7 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogUser')
     setUser(null)
   }
+console.log(blogs);
 
   return (
     <>

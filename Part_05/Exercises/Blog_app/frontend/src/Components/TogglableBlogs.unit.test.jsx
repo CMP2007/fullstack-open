@@ -14,7 +14,7 @@ describe('Component: <TogglableBlogs/>',() => {
     url: 'www/hola.net',
     likes: 6,
     user: {
-      username: 'marico',
+      username: 'mano',
       name: 'Miguel',
       id:'321'
     }
@@ -42,7 +42,6 @@ describe('Component: <TogglableBlogs/>',() => {
       const url = screen.queryByText(blog.url)
       expect(url).toBeNull()
       const likes = screen.queryByText(blog.likes)
-      // expect(likes).toBeNull()
       expect(screen.getByText(blog.likes)).not.toBeVisible()
     })
   })
