@@ -6,19 +6,19 @@ import {
 import BlogsList from './Components/BlogsList'
 import Blogs from './services/blogs'
 import Login from './Components/login'
-import LoginServise from './services/login'
+import LoginService from './services/login'
 import BlogsForm from './Components/BlogsForm'
 import createBlog from './services/CreateBlog'
 import  chageBlogs from './services/changeBlogs'
 import deletedBlogs from './services/deletedBlogs'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
-import { Container } from '@mui/material'
+import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material'
 
 const App = () => {
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
-  const [notification, setNotification] = useState({ text:null, style:null })
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     Blogs
@@ -39,16 +39,16 @@ const App = () => {
 
   const handlLogin = async (password, username ) => {
     try{
-      const response = await LoginServise.login({ password, username })
+      const response = await LoginService.login({ password, username })
       window.localStorage.setItem(
         'loggedBlogUser', JSON.stringify(response)
       )
       setUser(response)
     }
     catch {
-      setNotification({ text:'wrong username or password', style:'error' })
+      setNotification({ text:'wrong username or password', type:'error' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
   }
@@ -57,16 +57,16 @@ const App = () => {
     try{
       const response = await createBlog.CreateBlogs(newBlog, user.token)
       setBlogs(blogs.concat(response))
-      setNotification({ text:`a new blog ${response.title} by ${response.author} added`, style:'alert' })
+      setNotification({ text:`a new blog ${response.title} by ${response.author} added`, type:'success' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
     catch (exception){
       console.error('Error detallado:', exception)
-      setNotification({ text:`Error registering the blog ${newBlog.title} by ${newBlog.author}`, style:'error' })
+      setNotification({ text:`Error registering the blog ${newBlog.title} by ${newBlog.author}`, type:'error' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
   }
@@ -78,16 +78,16 @@ const App = () => {
       const response = await chageBlogs.changeBlogs(newBlog)
       const userAndBlog = { ...response, user: userData }
       setBlogs(blogs.map(blog => blog.id !== newBlog.id ? blog : userAndBlog))
-      setNotification({ text:`a vote for ${response.title} by ${response.author} added`, style:'alert' })
+      setNotification({ text:`a vote for ${response.title} by ${response.author} added`, type:'success' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
     catch (exception){
       console.error('Error detallado:', exception)
-      setNotification({ text:`Error registering the vote ${newBlog.title} by ${newBlog.author}`, style:'error' })
+      setNotification({ text:`Error registering the vote ${newBlog.title} by ${newBlog.author}`, type:'error' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
   }
@@ -97,45 +97,45 @@ const App = () => {
     try{
       await deletedBlogs.deletedBlogs(id, user.token)
       setBlogs(blogs.filter(blog => blog.id !== id))
-      setNotification({ text:`the blog ${blogD.title} by ${blogD.author} has been successfully deleted`, style:'alert' })
+      setNotification({ text:`the blog ${blogD.title} by ${blogD.author} has been successfully deleted`, type:'success' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
     catch (exception){
       console.error('Error detallado:', exception)
-      setNotification({ text:`Error deleting the blog ${blogD.title} by ${blogD.author}`, style:'error' })
+      setNotification({ text:`Error deleting the blog ${blogD.title} by ${blogD.author}`, type:'error' })
       setTimeout(() => {
-        setNotification({ text:null, style:null })
+        setNotification(null)
       },5000)
     }
-  }
-
-  const padding = {
-    padding: 5
   }
 
   const closeSession = () => {
     window.localStorage.removeItem('loggedBlogUser')
     setUser(null)
   }
-console.log(blogs);
 
   return (
-    <Container sx={{marginLeft: '60px'}}>
+    <Container>
       <Router>
-        <div>
-          <Link style={padding} to="/">Blogs</Link>
-          {user 
-            ? <>
-                <Link style={padding} to="/newBlog">new blog</Link> 
-                <button onClick={closeSession}>logout</button>
-              </> 
-            : <Link style={padding} to="/login">Login</Link> 
-          }
-        </div>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" sx={{ fontSize: '20px', flexGrow: 1 }}>
+              Blog App
+            </Typography>
+            <Button color="inherit" component={Link} to="/" >Blogs</Button>
+            {user 
+              ? <>
+                  <Button color="inherit" component={Link} to="/newBlog" >new blog</Button>
+                  <Button color="inherit" onClick={closeSession} >logout</Button> 
+                </> 
+              : <Button color="inherit" component={Link} to="/login" >Login</Button>
+            }
+          </Toolbar>
+        </AppBar>
 
-        <Notification message = {notification.text} style={notification.style}/>
+        <Notification notification = {notification}/>
 
         <Routes>
           <Route path="/blogs/:id" element={
