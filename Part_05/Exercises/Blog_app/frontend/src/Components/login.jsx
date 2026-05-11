@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useNavigate } from 'react-router-dom'
+import { TextField, Button } from '@mui/material'
 
 const Login = ({ handlLogin }) => {
   const [username, setUsername] = useState('')
@@ -18,24 +19,26 @@ const Login = ({ handlLogin }) => {
     <>
       <h1>log in to application</h1>
       <form onSubmit={loginSend}>
-        <label htmlFor="username"><b>username</b></label>
-        <input type="text"
-          name="username"
-          id='username'
+        <TextField 
+          label= 'username'
+          variant="standard"
           value={username}
           onChange={({ target }) => setUsername(target.value)}
+          id='username'
         />
-        <br />
-        <label htmlFor="password"><b>password</b></label>
-        <input
-          type="password"
-          name="Password"
-          id='password'
+        <br/>
+        <TextField 
+          label= 'password'
+          variant="standard"
+          type='password'
           value={password}
           onChange={({ target }) => setPassword(target.value) }
+          id='password'
         />
         <br />
-        <button type="submit">login</button>
+        <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
+            login
+        </Button>
       </form>
     </>
   )

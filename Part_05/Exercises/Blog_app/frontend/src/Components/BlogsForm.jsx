@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {useNavigate } from 'react-router-dom'
+import { TextField, Button } from '@mui/material'
 
 const BlogsForm = ({ handlBlog }) => {
   const [title, setTitle] = useState('')
@@ -26,40 +27,43 @@ const BlogsForm = ({ handlBlog }) => {
   return(
     <form onSubmit={submit}>
       <h1>Create New</h1>
-      <label htmlFor="title">Title</label>
-      <input
-        type="text"
-        required
-        name="title"
-        id="title"
-        placeholder='Enter the title here'
-        value={title}
-        onChange={({ target }) => setTitle(target.value) }
-      />
+      <TextField 
+          required
+          label= 'Title'
+          value={title}
+          onChange={({ target }) => setTitle(target.value) }
+          id="title"
+          sx={{ 
+          width: '40%',
+          marginBottom: '12px'
+          }}
+        />
       <br />
-      <label htmlFor="author">Author</label>
-      <input
-        type="text"
+      <TextField 
         required
-        name="author"
-        id="author"
-        placeholder='Enter the author here'
+        label= 'Author'
         value={author}
         onChange={({ target }) => setAuthor(target.value) }
+        id="author"
+        sx={{ 
+          width: '40%',
+          marginBottom: '12px'
+          }}
       />
-      <br />
-      <label htmlFor="url">Url</label>
-      <input
-        type="text"
+      <br/>
+      <TextField 
         required
-        name="url"
-        id="url"
-        placeholder='Enter the URL here'
+        label= 'Url'
         value={url}
         onChange={({ target }) => setUrl(target.value) }
+        id="url"
+        sx={{ 
+          width: '40%',
+          marginBottom: '1rem'
+         }}
       />
       <br />
-      <button type="submit">Create</button>
+      <Button type="submit" variant="contained">Create</Button>
     </form>
   )
 }

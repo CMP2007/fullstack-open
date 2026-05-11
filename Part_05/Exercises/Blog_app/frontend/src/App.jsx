@@ -13,7 +13,7 @@ import  chageBlogs from './services/changeBlogs'
 import deletedBlogs from './services/deletedBlogs'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
-import './index.css'
+import { Container } from '@mui/material'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -122,7 +122,7 @@ const App = () => {
 console.log(blogs);
 
   return (
-    <>
+    <Container sx={{marginLeft: '60px'}}>
       <Router>
         <div>
           <Link style={padding} to="/">Blogs</Link>
@@ -152,7 +152,7 @@ console.log(blogs);
           } />
         </Routes>
       </Router>
-    </>
+    </Container>
   )
 }
 
