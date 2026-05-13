@@ -38,7 +38,7 @@ describe('testing de la vista individual de los blogs', ()=>{
     renderBlogs(null)
     const title = screen.getByText(/Testing blog/)
     expect(title).toBeDefined()
-    const author = screen.getByText(/Test/)
+    const author = screen.getByText(/Added by: "userApp"/i)
     expect(author).toBeDefined()
 
     const buttons = screen.queryAllByRole('button')
@@ -50,7 +50,7 @@ describe('testing de la vista individual de los blogs', ()=>{
     renderBlogs({id: "6981751bd4e723e9863c589"})
     const title = screen.getByText(/Testing blog/)
     expect(title).toBeDefined()
-    const author = screen.getByText(/Test/)
+    const author = screen.getByText(/Added by: "userApp"/i)
     expect(author).toBeDefined()
 
     const likeButton = screen.getByRole('button', { name: /like/i })
@@ -63,9 +63,9 @@ describe('testing de la vista individual de los blogs', ()=>{
   test('los botones like y remove se muestra al usuario creador del blog', ()=>{
 
     renderBlogs(blogs[0].user)
-    const title = screen.getByText(/Testing blog/)
+    const title = screen.getByText(/Testing blog/i)
     expect(title).toBeDefined()
-    const author = screen.getByText(/Test/)
+    const author = screen.getByText(/Added by: "userApp"/i)
     expect(author).toBeDefined()
 
     const likeButton = screen.getByRole('button', { name: /like/i })

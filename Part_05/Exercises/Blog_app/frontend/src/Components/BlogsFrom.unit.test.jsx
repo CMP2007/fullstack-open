@@ -14,9 +14,9 @@ describe('testing of the form for creating new blogs', () => {
         </Router>
       )
 
-      const inputTitle = screen.getByPlaceholderText('Enter the title here')
-      const inputAuthor = screen.getByPlaceholderText('Enter the author here')
-      const inputUrl = screen.getByPlaceholderText('Enter the URL here')
+      const inputTitle = screen.getByLabelText(/Title/i)
+      const inputAuthor = screen.getByLabelText(/Author/i)
+      const inputUrl = screen.getByLabelText(/Url/i)
       const button = screen.getByRole('button', {name: /create/i})
 
       await user.type(inputTitle, 'Prueba Testing')

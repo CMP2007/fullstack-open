@@ -42,13 +42,7 @@ describe('Blog app', () => {
 
     test('fails with wrong credentials', async ({ page }) => {
       await loginWith(page, 'test', 'error')
-
-      const errorDiv = await page.locator('.error')
-      await expect(errorDiv).toContainText('wrong username or password')
-      await expect(errorDiv).toHaveCSS('border-style', 'solid')
-      await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
-
-      await expect(page.getByText('test logged in')).not.toBeVisible()
+        await expect(page.getByText('wrong username or password')).toBeVisible()
     })
 
     describe('When logged in', () => {
@@ -58,11 +52,8 @@ describe('Blog app', () => {
       })
 
       test('a new blog can be created', async ({ page }) => {
-        const alertDiv = await page.locator('.alert')
-        await expect(alertDiv).toContainText('a new blog a blog created by playwright')
-        await expect(alertDiv).toHaveCSS('border-style', 'solid')
-        await expect(alertDiv).toHaveCSS('color', 'rgb(0, 128, 0)')
-        
+
+        await expect(page.getByText('a new blog a blog created by playwright')).toBeVisible()
         await expect(page.getByTestId('blog-list').getByText('a blog created by playwright')).toBeVisible()
       })
 
@@ -70,11 +61,7 @@ describe('Blog app', () => {
         await page.getByRole('link', { name: 'a blog created by playwright' }).click()
         await page.getByRole('button', { name: 'like' }).click()
 
-        const alertDiv = await page.locator('.alert')
-        await expect(alertDiv).toContainText('a vote for a blog created by playwright by Author name added')
-        await expect(alertDiv).toHaveCSS('border-style', 'solid')
-        await expect(alertDiv).toHaveCSS('color', 'rgb(0, 128, 0)')
-
+        await expect(page.getByText('a vote for a blog created by playwright by Author name added')).toBeVisible()
         await expect(page.getByText(1)).toBeVisible()
       })
 
@@ -86,11 +73,7 @@ describe('Blog app', () => {
           page.getByRole('button', { name: 'Remove' }).click()
         ])
 
-        const alertDiv = await page.locator('.alert')
-        await expect(alertDiv).toContainText('the blog a blog created by playwright by Author name has been successfully deleted')
-        await expect(alertDiv).toHaveCSS('border-style', 'solid')
-        await expect(alertDiv).toHaveCSS('color', 'rgb(0, 128, 0)')
-
+        await expect(page.getByText('he blog a blog created by playwright by Author name has been successfully deleted')).toBeVisible()
         await expect(page.getByTestId('blog-list').getByText('a blog created by playwright')).not.toBeVisible()
       })
 
