@@ -29,7 +29,6 @@ const useAnecdoteStore = create(set => ({
     }),
     addAnecdote: newAnecdote => set(state => {
       const objAnecdote = asObject(newAnecdote)
-      console.log(objAnecdote)
       return({anecdotes: state.anecdotes.concat(objAnecdote)})
     })
   },
