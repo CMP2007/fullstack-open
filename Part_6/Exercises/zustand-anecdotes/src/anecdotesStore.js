@@ -1,6 +1,8 @@
 import anecdoteService from './services/anecdotes'
 import { create } from 'zustand'
 
+import { useNotificationStore } from "./notificationStore"
+
 const useAnecdoteStore = create(set => ({
   anecdotes: [],
   filter: '',
@@ -9,7 +11,8 @@ const useAnecdoteStore = create(set => ({
       try {
         const anecdotes = await anecdoteService.getAll()
         set(() => ({ anecdotes }))
-      } catch (error) {
+      } 
+      catch (error) {
         console.error("error initializing the anecdotes:", error)
       }
     },
@@ -21,16 +24,22 @@ const useAnecdoteStore = create(set => ({
           const newAnecdote = state.anecdotes.map(a => a.id !== anecdote.id ?a :response)
           return {anecdotes: newAnecdote} 
         })
-      } catch (error) {
+        useNotificationStore.getState().actions.changeAlert(`You voted '${anecdote.content}'`)
+      } 
+      catch (error) {
         console.error("Error updating votes:", error)
+        useNotificationStore.getState().actions.changeAlert(`Your vote could not be processed`)
       }
     },
     addAnecdote: async content => {
       try {
         const newAnecdote = await anecdoteService.createNew(content)
         set(state => ({anecdotes: state.anecdotes.concat(newAnecdote)}))
-      } catch (error) {
+        useNotificationStore.getState().actions.changeAlert( `Your anecdote '${content}' was created correctly`)
+      } 
+      catch (error) {
         console.error("error created the anecdotes:", error)
+        useNotificationStore.getState().actions.changeAlert( `The anecdote could not be processed.`)
       }
     },
     setFilter : value => set(() => ({filter: value}))
