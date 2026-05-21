@@ -6,18 +6,32 @@ const useAnecdoteStore = create(set => ({
   filter: '',
   actions: {
      initialize: async () => {
-      const anecdotes = await anecdoteService.getAll()
-      set(() => ({ anecdotes }))
+      try {
+        const anecdotes = await anecdoteService.getAll()
+        set(() => ({ anecdotes }))
+      } catch (error) {
+        console.error("error initializing the anecdotes:", error)
+      }
     },
-    addVotes: id => set(state => {
-      const anecdote = state.anecdotes.find(a => a.id === id)
-      const newValue = {...anecdote, votes: anecdote.votes + 1}
-      const newAnecdotes = state.anecdotes.map(a => a.id !== id ?a :newValue)
-      return {anecdotes: newAnecdotes} 
-    }),
+    addVotes: async anecdote => {
+      const anecdoteUpdate = {...anecdote, votes: anecdote.votes + 1}
+      try {
+        const response = await anecdoteService.update(anecdoteUpdate)
+        set(state => {
+          const newAnecdote = state.anecdotes.map(a => a.id !== anecdote.id ?a :response)
+          return {anecdotes: newAnecdote} 
+        })
+      } catch (error) {
+        console.error("Error updating votes:", error)
+      }
+    },
     addAnecdote: async content => {
-      const newAnecdote = await anecdoteService.createNew(content)
-      set(state => ({anecdotes: state.anecdotes.concat(newAnecdote)}))
+      try {
+        const newAnecdote = await anecdoteService.createNew(content)
+        set(state => ({anecdotes: state.anecdotes.concat(newAnecdote)}))
+      } catch (error) {
+        console.error("error created the anecdotes:", error)
+      }
     },
     setFilter : value => set(() => ({filter: value}))
   },
