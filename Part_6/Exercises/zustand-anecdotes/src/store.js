@@ -1,14 +1,6 @@
 import anecdoteService from './services/anecdotes'
 import { create } from 'zustand'
 
-const getId = () => (100000 * Math.random()).toFixed(0)
-
-const asObject = anecdote => ({
-  content: anecdote,
-  id: getId(),
-  votes: 0
-})
-
 const useAnecdoteStore = create(set => ({
   anecdotes: [],
   filter: '',
@@ -23,10 +15,10 @@ const useAnecdoteStore = create(set => ({
       const newAnecdotes = state.anecdotes.map(a => a.id !== id ?a :newValue)
       return {anecdotes: newAnecdotes} 
     }),
-    addAnecdote: newAnecdote => set(state => {
-      const objAnecdote = asObject(newAnecdote)
-      return({anecdotes: state.anecdotes.concat(objAnecdote)})
-    }),
+    addAnecdote: async content => {
+      const newAnecdote = await anecdoteService.createNew(content)
+      set(state => ({anecdotes: state.anecdotes.concat(newAnecdote)}))
+    },
     setFilter : value => set(() => ({filter: value}))
   },
 }))
