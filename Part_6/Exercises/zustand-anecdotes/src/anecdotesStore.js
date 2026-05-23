@@ -42,6 +42,20 @@ const useAnecdoteStore = create(set => ({
         useNotificationStore.getState().actions.changeAlert( `The anecdote could not be processed.`)
       }
     },
+    deleteAnecdote: async anecdote => {
+      try {
+        await anecdoteService.deleted(anecdote)       
+        set(state => {
+          const newList = state.anecdotes.filter(a => a.id !== anecdote.id)
+          return {anecdotes: newList} 
+        })
+        useNotificationStore.getState().actions.changeAlert(`Deleted anecdote'${anecdote.content}'`)
+      } 
+      catch (error) {
+        console.error("Error updating votes:", error)
+        useNotificationStore.getState().actions.changeAlert(`The anecdote could not be deleted`)
+      }
+    },
     setFilter : value => set(() => ({filter: value}))
   },
 }))
