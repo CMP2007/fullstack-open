@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { render, screen } from '@testing-library/react'
 import { renderHook, act } from '@testing-library/react'
+import AnecdoteList from './components/AnecdoteList'
 
 vi.mock('./services/anecdotes', () => ({
   default: {
@@ -31,5 +33,35 @@ describe('useAnecdoteActions', () => {
 
     const { result: anecdoteResult } = renderHook(() => useAnecdotes())
     expect(anecdoteResult.current).toEqual(mockNotes)
+  })
+})
+
+describe('useAnecdotes sort the data', () => {
+  const anecdotes = [
+    { id: 1, content: 'A', votes: 0 },
+    { id: 2, content: 'B', votes: 5 },
+  ]
+
+  beforeEach(() => {
+    useAnecdoteStore.setState({ anecdotes })
+  })
+
+  it('returns all anecdotes', () => {
+    const { result } = renderHook(() => useAnecdotes())
+    expect(result.current).toHaveLength(2)
+  })
+
+  it('Order the anecdotes according to their votes', () => {
+    const { result } = renderHook(() => useAnecdotes())
+    console.log(result.current);
+    
+    expect(result.current).toEqual([anecdotes[1], anecdotes[0]])
+  })
+
+  it('the component receives the sorted data', () => {
+    render(<AnecdoteList />)
+    const items = screen.getAllByText(/^[A-Z]$/).map(el => el.textContent)
+
+    expect(items).toEqual(['B', 'A'])
   })
 })

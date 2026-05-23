@@ -64,8 +64,8 @@ export const useAnecdoteStore = create(devtools(set => ({
 export const useAnecdotes = () => {
   const anecdotes = useAnecdoteStore((state) => state.anecdotes)
   const filter = useAnecdoteStore((state) => state.filter)
-  
-  return anecdotes.filter(anecdote => 
+  const orderedAnecdotes = anecdotes.toSorted((a, b) => b.votes - a.votes)
+  return orderedAnecdotes.filter(anecdote => 
     anecdote.content.toLowerCase().includes(filter.toLowerCase())  
   ) 
 }
