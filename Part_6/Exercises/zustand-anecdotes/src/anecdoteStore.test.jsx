@@ -77,4 +77,22 @@ describe('useAnecdotes sort the data', () => {
     expect(screen.getByText('B')).toBeDefined()
     expect(screen.queryByText('A')).toBeNull()
   })
+
+  it('The act of voting increases the vote count', async () => {
+    const user = userEvent.setup()
+
+    const anecdoteToVote = anecdotes.find(a => a.content === 'A')
+    
+    anecdoteService.update.mockResolvedValue({
+      ...anecdoteToVote,
+      votes: anecdoteToVote.votes + 1
+    })
+
+    render(<AnecdoteList />)
+    
+    expect(screen.queryByText('1')).toBeNull()
+    const buttons = screen.getAllByText('vote')
+    await user.click(buttons[1])
+    expect(screen.getByText('has 1')).toBeDefined()
+  })
 })
