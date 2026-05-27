@@ -1,7 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
+import userEvent from '@testing-library/user-event'
 import { render, screen } from '@testing-library/react'
 import { renderHook, act } from '@testing-library/react'
 import AnecdoteList from './components/AnecdoteList'
+import Filter from './components/Filter'
 
 vi.mock('./services/anecdotes', () => ({
   default: {
@@ -52,16 +54,27 @@ describe('useAnecdotes sort the data', () => {
   })
 
   it('Order the anecdotes according to their votes', () => {
-    const { result } = renderHook(() => useAnecdotes())
-    console.log(result.current);
-    
+    const { result } = renderHook(() => useAnecdotes()) 
     expect(result.current).toEqual([anecdotes[1], anecdotes[0]])
   })
 
   it('the component receives the sorted data', () => {
     render(<AnecdoteList />)
     const items = screen.getAllByText(/^[A-Z]$/).map(el => el.textContent)
-
     expect(items).toEqual(['B', 'A'])
+  })
+
+  it('the componentAnecdoteList receives the filtered anecdotes', async () => {
+    const user = userEvent.setup()
+    render(
+      <>
+        <Filter/>
+        <AnecdoteList />
+      </>
+    )
+    const filter = screen.getByRole('textbox')
+    await user.type(filter, 'b')
+    expect(screen.getByText('B')).toBeDefined()
+    expect(screen.queryByText('A')).toBeNull()
   })
 })
