@@ -3,7 +3,7 @@
     {
       "id": "1",
       "content": "tanstack query simplifies the communication with backend",
-      "important": true
+      "important": false
     },
     {
       "id": "2",
@@ -11,14 +11,9 @@
       "important": false
     },
     {
-      "content": "hola",
-      "important": true,
-      "id": "pbSSrjhmZK8"
-    },
-    {
-      "content": "yes",
+      "content": "holla",
       "important": false,
-      "id": "tDEBDeM0CZw"
+      "id": "NQxNLvVOqAQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
