@@ -18,7 +18,6 @@ const App = () => {
 
   if (!anecdotes) return null;
 
-
   return (
     <div>
       <h3>Anecdote app</h3>
