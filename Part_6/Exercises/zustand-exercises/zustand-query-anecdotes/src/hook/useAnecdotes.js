@@ -35,9 +35,7 @@ export const useAnecdotes = () =>{
     addAnecdote: content => content.length < 5 
       ? console.error('The anecdote must be at least 5 characters long') 
       :newAnecdoteMutation.mutate({ content, votes: 0 }),
-    voteAnecdote: updatedAnecdote => {
-      console.log(updatedAnecdote);
-      
+    voteAnecdote: updatedAnecdote => {  
       updateAnecdoteMutation.mutate({...updatedAnecdote, votes: updatedAnecdote.votes +1 })
     }
   }
