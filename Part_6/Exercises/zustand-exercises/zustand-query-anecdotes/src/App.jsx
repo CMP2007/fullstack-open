@@ -3,10 +3,10 @@ import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 
 const App = () => {
-  const {anecdotes, isPending, isError, error} = useAnecdotes()
+  const {anecdotes, isPending, isError, error, voteAnecdote} = useAnecdotes()
 
-  const handleVote = () => {
-    console.log('vote')
+  const handleVote = anecdote => {    
+    voteAnecdote(anecdote)
   }
 
    if (isPending) { return <div>loading data...</div>}
@@ -30,7 +30,7 @@ const App = () => {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => handleVote()}>vote</button>
+            <button onClick={() => handleVote(anecdote)}>vote</button>
           </div>
         </div>
       ))}

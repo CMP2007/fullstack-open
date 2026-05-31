@@ -14,7 +14,7 @@ const AnecdoteForm = () => {
     <div>
       <h3>create new</h3>
       <form onSubmit={onCreate}>
-        <input name="anecdote" minlength="5"/>
+        <input name="anecdote" minLength="5"/>
         <button type="submit">create</button>
       </form>
     </div>
