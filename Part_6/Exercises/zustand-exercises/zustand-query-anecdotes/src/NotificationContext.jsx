@@ -1,4 +1,5 @@
-import { createContext, useState } from 'react'
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState } from 'react'
 
 const NotificationContext = createContext()
 
@@ -20,4 +21,15 @@ export const NotificationContextProvider = (props) => {
       {props.children}
     </NotificationContext.Provider>
   )
+}
+
+
+export const useNotificationValue = () => {
+  const context = useContext(NotificationContext)
+  return context.notification
+}
+
+export const useNotify = () => {
+  const context = useContext(NotificationContext)
+  return context.showNotification
 }
