@@ -9,9 +9,14 @@ const CreateNew = ({ addAnecdote }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
     addAnecdote({ content: content.value, author: author.value, info: info.value, votes: 0 })
     navigate('/')
+  }
+
+  const reseted = () => {
+    content.reset()
+    author.reset()
+    info.reset()
   }
 
   return (
@@ -31,6 +36,7 @@ const CreateNew = ({ addAnecdote }) => {
           <input {...info} /> 
         </div>
         <button>create</button>
+        <button type='button' onClick={reseted}>Reset</button>
       </form>
     </div>
   )
