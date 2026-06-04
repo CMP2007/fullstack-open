@@ -3,20 +3,24 @@ import  { useField } from '../hooks'
 
 const CreateNew = ({ addAnecdote }) => {
   const navigate = useNavigate()
-  const content = useField('text')
-  const author = useField('text')
-  const info = useField('text')
+  const {reset: resetContent, ...inputContent} = useField('text')
+  const {reset: resetAuthor, ...inputAuthor} = useField('text')
+  const {reset: resetInfo, ...inputInfo} = useField('text')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addAnecdote({ content: content.value, author: author.value, info: info.value, votes: 0 })
+    addAnecdote({ 
+      content: inputContent.value, 
+      author: inputAuthor.value, 
+      info: inputInfo.value, votes: 0 
+    })
     navigate('/')
   }
 
   const reseted = () => {
-    content.reset()
-    author.reset()
-    info.reset()
+    resetContent()
+    resetAuthor()
+    resetInfo()
   }
 
   return (
@@ -25,15 +29,15 @@ const CreateNew = ({ addAnecdote }) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...content} /> 
+          <input {...inputContent} /> 
         </div>
         <div>
           author
-          <input {...author} /> 
+          <input {...inputAuthor} /> 
         </div>
         <div>
           url for more info
-          <input {...info} /> 
+          <input {...inputInfo} /> 
         </div>
         <button>create</button>
         <button type='button' onClick={reseted}>Reset</button>
