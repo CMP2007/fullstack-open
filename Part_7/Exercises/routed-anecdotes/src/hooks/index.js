@@ -21,11 +21,21 @@ export const useField = (type) => {
 }
 
 export const useAnecdotes = () => {
-    const [anecdotes, setAnecdotes] = useState([])
+  const [anecdotes, setAnecdotes] = useState([])
 
   useEffect(() => {
     anecdoteService.getAll().then(data => setAnecdotes(data))
   }, [])
 
-  return {anecdotes}
+  const addAnecdote =  async(anecdote) => {
+    try{
+      const data = await anecdoteService.createNew(anecdote)
+      setAnecdotes(anecdotes.concat(data))
+    }
+    catch (error){
+      console.error("Error capturado:", error.message)
+    }
+  }
+
+  return {anecdotes, addAnecdote}
 }
