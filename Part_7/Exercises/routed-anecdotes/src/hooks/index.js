@@ -37,5 +37,16 @@ export const useAnecdotes = () => {
     }
   }
 
-  return {anecdotes, addAnecdote}
+  const deleteAnecdote =  async(id) => {
+    try{
+      const data = await anecdoteService.deleted(id)
+      console.log(data);
+      setAnecdotes(anecdotes.filter(anecdote => anecdote.id !== id ))
+    }
+    catch (error){
+      console.error("Error capturado:", error.message)
+    }
+  }
+
+  return {anecdotes, addAnecdote, deleteAnecdote}
 }
