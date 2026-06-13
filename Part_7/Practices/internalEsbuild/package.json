@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "build": "esbuild src/main.jsx --bundle --minify --sourcemap --outfile=dist/main.js --jsx=automatic",
+    
+    "serve": "cd dist && python3 -m http.server 3000",
+    "_comment_serve": "Uso Python porque npx serve en WSL genera bucles de red infinitos que congelan Windows",
+
+    "dev": "esbuild src/main.jsx --bundle --minify --outfile=dist/main.js --jsx=automatic --watch",
+    "_comment_dev": "Uso --minify en dev para evitar que los archivos de 1.1MB saturen la memoria de WSL"
+  },
+  "dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.0"
+  }
+}
