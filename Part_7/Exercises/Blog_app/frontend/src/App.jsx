@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
-import ErrorBoundary from './Components/ErrorBoundary'
 import BlogsList from './Components/BlogsList'
 import Blogs from './services/blogs'
 import Login from './Components/login'
@@ -14,6 +13,8 @@ import  chageBlogs from './services/changeBlogs'
 import deletedBlogs from './services/deletedBlogs'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
+import ErrorBoundary from './Components/UI/ErrorBoundary'
+import Error404 from './Components/UI/Error404'
 import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material'
 
 const App = () => {
@@ -150,6 +151,9 @@ const App = () => {
             } />
             <Route path='/login' element={
               <Login handlLogin={handlLogin}/>
+            } />
+            <Route path='*' element={
+              <Error404/>
             } />
           </Routes>
         </ErrorBoundary>
