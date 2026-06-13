@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
+import ErrorBoundary from './Components/ErrorBoundary'
 import BlogsList from './Components/BlogsList'
 import Blogs from './services/blogs'
 import Login from './Components/login'
@@ -136,21 +137,22 @@ const App = () => {
         </AppBar>
 
         <Notification notification = {notification}/>
-
-        <Routes>
-          <Route path="/blogs/:id" element={
-            <Blog blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user}/>
-          } />
-          <Route path='/' element={
-            <BlogsList blogs={blogs} />
-          } />
-          <Route path='newBlog' element={
-            <BlogsForm handlBlog={handlBlog}/>
-          } />
-          <Route path='/login' element={
-            <Login handlLogin={handlLogin}/>
-          } />
-        </Routes>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/blogs/:id" element={
+              <Blog blogs={blogs} putBlogs={putBlogs} deleted={deletedB} user={user}/>
+            } />
+            <Route path='/' element={
+              <BlogsList blogs={blogs} />
+            } />
+            <Route path='newBlog' element={
+              <BlogsForm handlBlog={handlBlog}/>
+            } />
+            <Route path='/login' element={
+              <Login handlLogin={handlLogin}/>
+            } />
+          </Routes>
+        </ErrorBoundary>
       </Router>
     </Container>
   )
