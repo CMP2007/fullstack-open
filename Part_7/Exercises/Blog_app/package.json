@@ -11,7 +11,8 @@
   "author": "Carlos Puche",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "10.0.3"
+    "concurrently": "10.0.3",
+    "prettier": "3.8.4"
   },
   "dependencies": {
     "ejercicio_3.2": "file:backend"
