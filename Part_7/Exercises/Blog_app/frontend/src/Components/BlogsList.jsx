@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom'
+import { useBlogs } from '../stores/useBlogs'
 
-const BlogsList = ({ blogs }) => {
+const BlogsList = () => {
+  const blogs = useBlogs()
+
   const blogsSort = [...blogs].sort(function (a, b) {
-    return  b.likes - a.likes
+    return b.likes - a.likes
   })
 
-  return(
+  return (
     <>
       <h1>blogs</h1>
-      <div data-testid='blog-list'>
+      <div data-testid="blog-list">
         <ul>
-          {blogsSort.map(blog =>
-          <li key={blog.id}>
-            <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-          </li>
-        )}
+          {blogsSort.map((blog) => (
+            <li key={blog.id}>
+              <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+            </li>
+          ))}
         </ul>
       </div>
     </>

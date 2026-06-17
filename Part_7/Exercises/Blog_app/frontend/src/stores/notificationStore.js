@@ -16,3 +16,5 @@ export const useTextNotification = () =>
   useNotificationStore((state) => state.notification)
 export const useTimeNotification = () =>
   useNotificationStore((state) => state.timeNotification)
+
+export default useNotificationStore

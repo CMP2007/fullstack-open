@@ -1,23 +1,44 @@
 import { useParams } from 'react-router-dom'
-import {useNavigate } from 'react-router-dom'
-import { Card, CardContent, Typography, Link, CardActions, Box, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { useBlogs, useBlogsActions } from '../stores/useBlogs'
+import {
+  Card,
+  CardContent,
+  Typography,
+  Link,
+  CardActions,
+  Box,
+  Button,
+} from '@mui/material'
 
-const Blog = ({blogs, putBlogs, deleted, user}) =>{
+const Blog = ({ user }) => {
+  const blogs = useBlogs()
+  const { changeBlog, deleteBlog } = useBlogsActions()
+
   const id = useParams().id
-  const blog = blogs.find(b => b.id === id)
-  
+  const blog = blogs.find((b) => b.id === id)
+
   const navigate = useNavigate()
 
-   const confirDelete = () => {
+  const confirDelete = () => {
     if (window.confirm(`Remove blog ${blog.title}`)) {
-      deleted(blog.id)
+      deleteBlog(blog.id, user)
       navigate('/')
     }
   }
 
-   const hidenDelete = () => {
+  const hidenDelete = () => {
     if (user && (user.id === blog.user.id || user.id === blog.user)) {
-      return(<Button variant="outlined" size="small" color="error" onClick={() => confirDelete()}>REMOVE</Button>)
+      return (
+        <Button
+          variant="outlined"
+          size="small"
+          color="error"
+          onClick={() => confirDelete()}
+        >
+          REMOVE
+        </Button>
+      )
     } else {
       return null
     }
@@ -32,7 +53,7 @@ const Blog = ({blogs, putBlogs, deleted, user}) =>{
           </Typography>
 
           <Typography variant="subtitle1" gutterBottom>
-            By: {blog.author} 
+            By: {blog.author}
           </Typography>
 
           <Typography variant="body1" gutterBottom>
@@ -47,21 +68,31 @@ const Blog = ({blogs, putBlogs, deleted, user}) =>{
 
           <CardActions sx={{ paddingLeft: 0, marginTop: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 'bold' }}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ fontWeight: 'bold' }}
+              >
                 {blog.likes} likes
               </Typography>
-              {user 
-                ?<Button variant="outlined" size="small" onClick={() => putBlogs(blog)}>LIKE</Button>
-                :null
-              }
-              {user?hidenDelete() :null}
+              {user ? (
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => changeBlog(blog)}
+                >
+                  LIKE
+                </Button>
+              ) : null}
+              {user ? hidenDelete() : null}
             </Box>
           </CardActions>
         </CardContent>
       </Card>
     )
+  } else {
+    return null
   }
-  else {return null}
 }
 
 export default Blog

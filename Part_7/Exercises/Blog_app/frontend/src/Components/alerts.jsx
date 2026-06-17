@@ -3,7 +3,6 @@ import { useTextNotification } from '../stores/notificationStore'
 
 const Notification = () => {
   const notification = useTextNotification()
-  console.log(notification)
 
   if (notification.text === null) {
     return null
