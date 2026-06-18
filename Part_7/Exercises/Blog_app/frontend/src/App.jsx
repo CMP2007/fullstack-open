@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useBlogsActions } from './stores/blogStore'
+import { useUser, useUserActions } from './stores/userStore'
 import BlogsList from './Components/BlogsList'
-import Blogs from './services/blogs'
-import { useBlogsActions } from './stores/useBlogs'
 import Login from './Components/login'
-import LoginService from './services/login'
 import BlogsForm from './Components/BlogsForm'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
@@ -13,36 +12,17 @@ import Error404 from './Components/UI/Error404'
 import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material'
 
 const App = () => {
-  const [user, setUser] = useState(null)
+  const { initializeUser, closeSession } = useUserActions()
+  const user = useUser()
   const { initialize } = useBlogsActions()
 
   useEffect(() => {
-    Blogs.getAll().then((response) => initialize(response))
+    initialize()
   }, [initialize])
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUser(user)
-    }
-  }, [])
-
-  const handlLogin = async (password, username) => {
-    try {
-      const response = await LoginService.login({ password, username })
-      window.localStorage.setItem('loggedBlogUser', JSON.stringify(response))
-      setUser(response)
-    } catch {
-      timeNotification('wrong username or password', 'error')
-    }
-  }
-
-  const closeSession = () => {
-    window.localStorage.removeItem('loggedBlogUser')
-    setUser(null)
-  }
+    initializeUser()
+  }, [initializeUser])
 
   return (
     <Container>
@@ -75,10 +55,10 @@ const App = () => {
         <Notification />
         <ErrorBoundary>
           <Routes>
-            <Route path="/blogs/:id" element={<Blog user={user} />} />
+            <Route path="/blogs/:id" element={<Blog />} />
             <Route path="/" element={<BlogsList />} />
-            <Route path="newBlog" element={<BlogsForm user={user} />} />
-            <Route path="/login" element={<Login handlLogin={handlLogin} />} />
+            <Route path="newBlog" element={<BlogsForm />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </ErrorBoundary>

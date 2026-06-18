@@ -1,43 +1,45 @@
-import {useState} from 'react'
-import {useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TextField, Button } from '@mui/material'
+import { useUserActions } from '../stores/userStore'
 
-const Login = ({ handlLogin }) => {
+const Login = () => {
+  const { login } = useUserActions()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
-  
+
   const loginSend = (event) => {
     event.preventDefault()
-    handlLogin(password, username)
+    login(password, username)
     setUsername('')
     setPassword('')
     navigate('/')
   }
-  return(
+  return (
     <>
       <h1>log in to application</h1>
       <form onSubmit={loginSend}>
-        <TextField 
-          label= 'username'
+        <TextField
+          label="username"
           variant="standard"
           value={username}
           onChange={({ target }) => setUsername(target.value)}
-          id='username'
+          id="username"
         />
-        <br/>
-        <TextField 
-          label= 'password'
+        <br />
+        <TextField
+          label="password"
           variant="standard"
-          type='password'
+          type="password"
           value={password}
-          onChange={({ target }) => setPassword(target.value) }
-          id='password'
+          onChange={({ target }) => setPassword(target.value)}
+          id="password"
         />
         <br />
         <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
-            login
+          login
         </Button>
       </form>
     </>

@@ -5,7 +5,10 @@ import useNotificationStore from './notificationStore'
 const useBlogStore = create((set, get) => ({
   blogs: [],
   actions: {
-    initialize: (blogs) => set(() => ({ blogs })),
+    initialize: async () => {
+      const response = await Blogs.getAll()
+      set((state) => ({ ...state, blogs: response }))
+    },
     addBLog: async (blog, user) => {
       try {
         const response = await Blogs.CreateBlogs(blog, user.token)
@@ -54,8 +57,6 @@ const useBlogStore = create((set, get) => ({
       }
     },
     deleteBlog: async (id, user) => {
-      console.log(id, user)
-
       const blog = get().blogs.find((blog) => blog.id === id)
       try {
         await Blogs.deletedBlogs(id, user.token)

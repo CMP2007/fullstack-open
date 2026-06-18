@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useBlogs } from '../stores/useBlogs'
+import { useBlogs } from '../stores/blogStore'
 
 const BlogsList = () => {
   const blogs = useBlogs()

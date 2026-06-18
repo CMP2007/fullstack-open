@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useBlogs, useBlogsActions } from '../stores/useBlogs'
+import { useBlogs, useBlogsActions } from '../stores/blogStore'
+import { useUser } from '../stores/userStore'
 import {
   Card,
   CardContent,
@@ -11,7 +12,8 @@ import {
   Button,
 } from '@mui/material'
 
-const Blog = ({ user }) => {
+const Blog = () => {
+  const user = useUser()
   const blogs = useBlogs()
   const { changeBlog, deleteBlog } = useBlogsActions()
 

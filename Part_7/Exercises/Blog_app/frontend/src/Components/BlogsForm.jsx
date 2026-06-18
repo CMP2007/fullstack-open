@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TextField, Button } from '@mui/material'
-import { useBlogsActions } from '../stores/useBlogs'
+import { useBlogsActions } from '../stores/blogStore'
+import { useUser } from '../stores/userStore'
 
-const BlogsForm = ({ user }) => {
+const BlogsForm = () => {
+  const user = useUser()
   const { addBLog } = useBlogsActions()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
