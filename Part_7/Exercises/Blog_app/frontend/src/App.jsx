@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { useBlogsActions } from './stores/blogStore'
 import { useUser, useUserActions } from './stores/userStore'
@@ -8,6 +8,7 @@ import BlogsForm from './Components/BlogsForm'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
 import ErrorBoundary from './Components/UI/ErrorBoundary'
+import UsersList from './Components/UsersList'
 import Error404 from './Components/UI/Error404'
 import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material'
 
@@ -37,6 +38,9 @@ const App = () => {
             </Button>
             {user ? (
               <>
+                <Button color="inherit" component={Link} to="/users">
+                  users
+                </Button>
                 <Button color="inherit" component={Link} to="/newBlog">
                   new blog
                 </Button>
@@ -56,6 +60,7 @@ const App = () => {
         <ErrorBoundary>
           <Routes>
             <Route path="/blogs/:id" element={<Blog />} />
+            <Route path="/users" element={<UsersList />} />
             <Route path="/" element={<BlogsList />} />
             <Route path="newBlog" element={<BlogsForm />} />
             <Route path="/login" element={<Login />} />
