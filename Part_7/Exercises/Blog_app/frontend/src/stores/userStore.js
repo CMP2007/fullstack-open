@@ -1,23 +1,21 @@
 import { create } from 'zustand'
 import LoginService from '../services/login'
 import useNotificationStore from './notificationStore'
+import userServices from '../services/persistentUser'
 
 const useUserStore = create((set) => ({
   user: null,
   actions: {
     initializeUser: () => {
-      const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
-      if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON)
-        set((state) => ({ ...state, user: user }))
+      const loggedUser = userServices.getUser()
+      if (loggedUser) {
+        set((state) => ({ ...state, user: loggedUser }))
       }
     },
     login: async (password, username) => {
-      console.log(password, username)
       try {
         const response = await LoginService.login({ password, username })
-        console.log(response)
-        window.localStorage.setItem('loggedBlogUser', JSON.stringify(response))
+        userServices.saveUser(response)
         set((state) => ({ ...state, user: response }))
       } catch {
         useNotificationStore
@@ -26,7 +24,7 @@ const useUserStore = create((set) => ({
       }
     },
     closeSession: () => {
-      window.localStorage.removeItem('loggedBlogUser')
+      userServices.removeUser()
       set((state) => ({ ...state, user: null }))
     },
   },

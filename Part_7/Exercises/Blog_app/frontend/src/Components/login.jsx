@@ -1,20 +1,20 @@
-import { useState } from 'react'
+import useField from '../services/useField'
 import { useNavigate } from 'react-router-dom'
 import { TextField, Button } from '@mui/material'
 import { useUserActions } from '../stores/userStore'
 
 const Login = () => {
   const { login } = useUserActions()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
 
   const navigate = useNavigate()
 
   const loginSend = (event) => {
     event.preventDefault()
-    login(password, username)
-    setUsername('')
-    setPassword('')
+    login(password.value, username.value)
+    username.reset()
+    password.reset()
     navigate('/')
   }
   return (
@@ -24,17 +24,17 @@ const Login = () => {
         <TextField
           label="username"
           variant="standard"
-          value={username}
-          onChange={({ target }) => setUsername(target.value)}
+          value={username.value}
+          onChange={username.onChange}
           id="username"
         />
         <br />
         <TextField
           label="password"
           variant="standard"
-          type="password"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
+          type={password.type}
+          value={password.value}
+          onChange={password.onChange}
           id="password"
         />
         <br />

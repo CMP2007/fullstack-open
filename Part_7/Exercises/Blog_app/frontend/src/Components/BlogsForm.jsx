@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import useField from '../services/useField'
 import { useNavigate } from 'react-router-dom'
 import { TextField, Button } from '@mui/material'
 import { useBlogsActions } from '../stores/blogStore'
@@ -7,24 +7,24 @@ import { useUser } from '../stores/userStore'
 const BlogsForm = () => {
   const user = useUser()
   const { addBLog } = useBlogsActions()
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   const navigate = useNavigate()
 
   const submit = (event) => {
     event.preventDefault()
     const newBlog = {
-      title: title,
-      author: author,
-      url: url,
+      title: title.value,
+      author: author.value,
+      url: url.value,
     }
-    if (title !== '' && author !== '' && url !== '') {
+    if (title.value !== '' && author.value !== '' && url.value !== '') {
       addBLog(newBlog, user)
-      setTitle('')
-      setAuthor('')
-      setUrl('')
+      title.reset()
+      author.reset()
+      url.reset()
       navigate('/')
     }
   }
@@ -34,8 +34,8 @@ const BlogsForm = () => {
       <TextField
         required
         label="Title"
-        value={title}
-        onChange={({ target }) => setTitle(target.value)}
+        value={title.value}
+        onChange={title.onChange}
         id="title"
         sx={{
           width: '40%',
@@ -46,8 +46,8 @@ const BlogsForm = () => {
       <TextField
         required
         label="Author"
-        value={author}
-        onChange={({ target }) => setAuthor(target.value)}
+        value={author.value}
+        onChange={author.onChange}
         id="author"
         sx={{
           width: '40%',
@@ -58,8 +58,8 @@ const BlogsForm = () => {
       <TextField
         required
         label="Url"
-        value={url}
-        onChange={({ target }) => setUrl(target.value)}
+        value={url.value}
+        onChange={url.onChange}
         id="url"
         sx={{
           width: '40%',
