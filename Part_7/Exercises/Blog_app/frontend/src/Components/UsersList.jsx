@@ -45,7 +45,7 @@ const UsersList = () => {
                     component={RouterLink}
                     to={`/users/${user.id}`}
                     underline="none"
-                    color="inherit"
+                    color="primary"
                   >
                     {user.name}
                   </MuiLink>

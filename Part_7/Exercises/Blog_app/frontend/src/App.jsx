@@ -1,21 +1,30 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import { useBlogsActions } from './stores/blogStore'
 import { useUser, useUserActions } from './stores/userStore'
 import BlogsList from './Components/BlogsList'
 import Login from './Components/login'
+import User from './Components/User'
 import BlogsForm from './Components/BlogsForm'
 import Notification from './Components/alerts'
 import Blog from './Components/Blog'
 import ErrorBoundary from './Components/UI/ErrorBoundary'
 import UsersList from './Components/UsersList'
 import Error404 from './Components/UI/Error404'
-import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material'
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Container,
+  Typography,
+  CssBaseline,
+} from '@mui/material'
 
 const App = () => {
   const { initializeUser, closeSession } = useUserActions()
   const user = useUser()
   const { initialize } = useBlogsActions()
+  const location = useLocation()
 
   useEffect(() => {
     initialize()
@@ -26,8 +35,9 @@ const App = () => {
   }, [initializeUser])
 
   return (
-    <Container>
-      <Router>
+    <>
+      <CssBaseline />
+      <Container>
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" sx={{ fontSize: '20px', flexGrow: 1 }}>
@@ -55,20 +65,20 @@ const App = () => {
             )}
           </Toolbar>
         </AppBar>
-
         <Notification />
-        <ErrorBoundary>
+        <ErrorBoundary key={location.pathname}>
           <Routes>
             <Route path="/blogs/:id" element={<Blog />} />
             <Route path="/users" element={<UsersList />} />
+            <Route path="/users/:id" element={<User />} />
             <Route path="/" element={<BlogsList />} />
             <Route path="newBlog" element={<BlogsForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </ErrorBoundary>
-      </Router>
-    </Container>
+      </Container>
+    </>
   )
 }
 
