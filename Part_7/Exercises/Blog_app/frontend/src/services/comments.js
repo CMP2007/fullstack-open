@@ -7,4 +7,13 @@ const getCommentsBlog = async (idBlog) => {
   return response
 }
 
-export default { getCommentsBlog }
+const addComment = async (newComment) => {
+  const request = await axios.post(
+    `${baseUrl}/${newComment.blogId}/comments`,
+    newComment,
+  )
+  const response = request.data
+  return response
+}
+
+export default { getCommentsBlog, addComment }

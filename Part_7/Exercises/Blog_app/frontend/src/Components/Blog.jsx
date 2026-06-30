@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useBlogs, useBlogsActions } from '../stores/blogStore'
 import { useUser } from '../stores/userStore'
-import Comments from './Comments'
+import CommentsList from './CommentsList'
+import CommentsForm from './CommentsForm'
 import {
   Card,
   CardContent,
@@ -90,7 +91,9 @@ const Blog = () => {
               {user ? hidenDelete() : null}
             </Box>
           </CardActions>
-          <Comments />
+          <h3>Comments</h3>
+          <CommentsForm />
+          <CommentsList />
         </CardContent>
       </Card>
     )
