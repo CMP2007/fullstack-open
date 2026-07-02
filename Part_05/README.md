@@ -37,13 +37,6 @@ This repository is part of my learning journey in the Full Stack Open course. In
 * Unit tests for isolated components.
 * Integration and E2E tests for complete user flows.
 * Use of `forwardRef` and `useImperativeHandle`.
-
-## 📋 Module Objectives / Key Features
-* Login implementation and token handling (localStorage).
-* Definition of propTypes for component validation.
-* Unit tests for isolated components.
-* Integration and E2E tests for complete user flows.
-* Use of `forwardRef` and `useImperativeHandle`.
 * Client-side routing implementation using React Router.
 * UI/UX refactoring and component styling using Material UI.
 
@@ -69,7 +62,6 @@ This repository is part of my learning journey in the Full Stack Open course. In
 * **Route Protection and Navigation:** Managing asynchronous user state to properly guard routes and handling smooth transitions with React Router without losing the authentication context.
 * **UI Customization and Constraints:** Overcoming Material UI's default style nesting to adapt components seamlessly into the existing layout without breaking layout responsiveness.
 
-  ## 📂 Project Structure
 ## 📂 Project Structure
 ```text
 .
