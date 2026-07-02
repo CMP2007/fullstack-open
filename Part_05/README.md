@@ -18,16 +18,16 @@ This repository is part of my learning journey in the Full Stack Open course. In
 ## 📸 Preview
 
 ### Login Screen
-![Login Screen](./ejercicio_5.1/screenshots/screenshotslogin.jpg)
+![Login Screen](./Exercises/screenshots/screenshotslogin.jpg)
 
 *Initial view where users must authenticate to access the bloglist.*
 
 ### Main Application
-![Project Preview](./ejercicio_5.1/screenshots/project-demo.jpg)
+![Project Preview](./Exercises/screenshots/project-demo.jpg)
 
 *Screenshot of the Bloglist application with the notification system.*
 
-![form Preview](./ejercicio_5.1/screenshots/project-demo-formBLog.jpg)
+![form Preview](./Exercises/screenshots/project-demo-formBLog.jpg)
 
 *Screenshot of the blog creation form.*
 
