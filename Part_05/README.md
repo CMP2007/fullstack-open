@@ -29,7 +29,7 @@ This repository is part of my learning journey in the Full Stack Open course. In
 
 ![form Preview](./ejercicio_5.1/screenshots/project-demo-formBLog.jpg)
 
-*Screenshot of the Bloglist application and the blog creation form.*
+*Screenshot of the blog creation form.*
 
 ## 📋 Module Objectives / Key Features
 * Login implementation and token handling (localStorage).
@@ -47,65 +47,72 @@ This repository is part of my learning journey in the Full Stack Open course. In
 * Client-side routing implementation using React Router.
 * UI/UX refactoring and component styling using Material UI.
 
-  -----
-
 ## 🎓 Learning Outcomes
-
 * Mastery of the JWT-based authentication flow and LocalStorage persistence.
-
 * Ability to write tests that simulate real user interactions, reducing production errors.
-  
 * Improvement in component architecture through the use of advanced Hooks and type validation with PropTypes.
+* Competence in managing single-page application (SPA) states and navigation links using React Router.
+* Practical experience in accelerating frontend development by integrating and customizing predefined component systems via Material UI.
   
 ## ✅ Completed Exercises
 * [x] 5.1 - 5.4: Bloglist frontend, steps 1-4
 * [x] 5.5 - 5.12: Bloglist frontend, steps 5-12
 * [x] 5.13 - 5.16: Bloglist tests, steps 1-4
 * [x] 5.17 - 5.23: Bloglist end to end testing, steps 1-7
+* [x] 5.24 - 5.28: Routed Blogs, steps 1-5
+* [x] 5.29 - 5.31: Styled Blogs, steps 1-3
 
 ## 🧠 Overcome Challenges
 * **Test Isolation:** Implementation of mocks for API services, ensuring that frontend tests do not depend on the backend state.
 * **Stability in E2E Tests:** Handling waits and robust selectors in Playwright to avoid "flaky tests" during the authentication flow.
 * **Component Encapsulation:** Correct use of `forwardRef` to expose functionalities of child components (such as collapsible forms) in a controlled manner.
+* **Route Protection and Navigation:** Managing asynchronous user state to properly guard routes and handling smooth transitions with React Router without losing the authentication context.
+* **UI Customization and Constraints:** Overcoming Material UI's default style nesting to adapt components seamlessly into the existing layout without breaking layout responsiveness.
 
   ## 📂 Project Structure
+## 📂 Project Structure
 ```text
 .
-├── ejercicio_5.1/        # Main Project (Bloglist)
-│   ├── frontend/         # React + Vite Client
-│   │   ├── src/          # Components and UI logic
+├── Blog_app/                      # Main Project (Bloglist)
+│   ├── frontend/                  # React + Vite Client
+│   │   ├── src/                   # Components and UI logic
 │   │   └── package.json
-│   ├── backend/          # Node.js / Express Server (API)
-│   │   ├── controllers/  # Route logic
-│   │   └── models/       # Database Schemas / Models
-│   └── E2E-Test/         # End-to-End Tests (Playwright)
-├── practica_5.1/         # **Follow-up material exercises**
-├── screenshots/          # **Screenshots for documentation**
-├── .gitignore            # Git excluded files
-└── README.md             # General documentation
+│   ├── backend/                   # Node.js / Express Server (API)
+│   │   ├── controllers/           # Route logic
+│   │   └── models/                # Database Schemas / Models
+│   └── E2E-Test/                  # End-to-End Tests (Playwright)
+├── Practices/                     # Follow-up material exercises
+│   ├── Note_app/                  # Base application integrating React Router
+│   ├── Note_app_UI_libraries/     # Interface refactor using Material UI (MUI)
+│   └── Note_app_styled_components/ # Alternative styling using Styled Components
+├── screenshots/                   # Screenshots for documentation
+├── .gitignore                     # Git excluded files
+└── README.md                      # General documentation
 ```
 
 ## 🚀 Installation
 ```bash
-# Clone and enter the directory
-git clone https://github.com/CMP2007/Fullstack-Open-course-part-5
-cd Fullstack-Open-course-part-5/ejercicio_5.1
+# Enter the Part 5 directory from the root of the repository
+cd Part_05/Exercises/Blog_app
 
-# Configure the Backend
+# Configure and start the Backend
 cd backend
 npm install
 # Note: Create your .env file with MONGODB_URI and SECRET
-cd ..
-
-# Configure the Frontend
-cd frontend
-npm install
-
-# Start in development for both parts with the command 
 npm run dev
 
-# Run tests
+# Open a new terminal and navigate to the frontend
+cd ../frontend
+npm install
+npm run dev
+
+# Run Unit/Integration Tests (Inside frontend folder)
 npm run test
+
+# Run E2E Tests (Navigate to E2E-Test folder from Blog_app root)
+cd ../E2E-Test
+npm install
+npx playwright test
 ```
 
 ## 🧪 Testing Suite
@@ -115,26 +122,26 @@ This project implements a comprehensive testing strategy across the entire stack
 Powered by Vitest and React Testing Library.
 
 ```bash
-cd ejercicio_5.1/frontend
+cd Part_05/Exercises/Blog_app/frontend
 npm run test
 npm run coverage # For coverage report
 ```
 ### 2. Backend: Integration Tests
-Using the native Node.js test runner with Supertest.
+Verifies API endpoints and database logic using the native Node.js test runner and Supertest.
 
 ```bash
-cd ejercicio_5.1/backend
+cd Part_05/Exercises/Blog_app/backend
 npm run test
 ```
 
 ### 3. End-to-End (E2E) Tests
-Utilizing Playwright for full user flow simulation.
+Utilizing Playwright for full user flow simulation, ensuring authentication and core features work seamlessly together.
 
 > [!IMPORTANT]
 > Prerequisites: The backend must be running in test mode (npm run start:test) and the frontend in dev mode (npm run dev) before executing E2E tests.
 
 ```bash
-cd ejercicio_5.1/E2E-Test
+cd Part_05/Exercises/Blog_app/E2E-Test
 npm run test        # Headless mode
 npm run interfaz    # Interactive UI mode
 ```
@@ -142,7 +149,7 @@ npm run interfaz    # Interactive UI mode
 ## ⚙️ Environment Configuration
 This project requires a MongoDB database and JWT secret.
 
-1. Create a .env file in ejercicio_5.1/backend/.
+1. Create a .env file in Part_05/Exercises/Blog_app/backend/.
 
 2. Define variables:
 
@@ -160,6 +167,6 @@ SECRET=your_jwt_secret_phrase
 This repository strictly follows the University of Helsinki conventions, including the use of npm for dependency management and testing scripts. The primary focus is the transition toward Test-Driven Development (TDD) and improving frontend architecture.
 
 ---
-**Carlos Puche** - Autodidactic Full Stack programming student.
+**Carlos Puche** - Self-Taught Full Stack Developer.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-puche-0444b53ba/)
