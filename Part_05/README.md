@@ -32,8 +32,8 @@ This repository is part of my learning journey in the Full Stack Open course. In
 *Screenshot of the blog creation form.*
 
 ## 📋 Module Objectives / Key Features
-* Login implementation and token handling (localStorage).
-* Definition of propTypes for component validation.
+* Login implementation and token handling (`localStorage`).
+* Definition of `propTypes` for component validation.
 * Unit tests for isolated components.
 * Integration and E2E tests for complete user flows.
 * Use of `forwardRef` and `useImperativeHandle`.
@@ -41,9 +41,9 @@ This repository is part of my learning journey in the Full Stack Open course. In
 * UI/UX refactoring and component styling using Material UI.
 
 ## 🎓 Learning Outcomes
-* Mastery of the JWT-based authentication flow and LocalStorage persistence.
+* Mastery of the JWT-based authentication flow and `localStorage` persistence.
 * Ability to write tests that simulate real user interactions, reducing production errors.
-* Improvement in component architecture through the use of advanced Hooks and type validation with PropTypes.
+* Improvement in component architecture through the use of advanced Hooks and type validation with `propTypes`.
 * Competence in managing single-page application (SPA) states and navigation links using React Router.
 * Practical experience in accelerating frontend development by integrating and customizing predefined component systems via Material UI.
   
@@ -65,19 +65,20 @@ This repository is part of my learning journey in the Full Stack Open course. In
 ## 📂 Project Structure
 ```text
 .
-├── Blog_app/                      # Main Project (Bloglist)
-│   ├── frontend/                  # React + Vite Client
-│   │   ├── src/                   # Components and UI logic
-│   │   └── package.json
-│   ├── backend/                   # Node.js / Express Server (API)
-│   │   ├── controllers/           # Route logic
-│   │   └── models/                # Database Schemas / Models
-│   └── E2E-Test/                  # End-to-End Tests (Playwright)
+├── Exercises/                     # Course required exercises
+│   ├── Blog_app/                  # Main Project (Bloglist)
+│   │   ├── frontend/              # React + Vite Client
+│   │   │   ├── src/               # Components and UI logic
+│   │   │   └── package.json
+│   │   ├── backend/               # Node.js / Express Server (API)
+│   │   │   ├── controllers/       # Route logic
+│   │   │   └── models/            # Database Schemas / Models
+│   │   └── E2E-Test/              # End-to-End Tests (Playwright)
+│   └── screenshots/               # Screenshots for documentation
 ├── Practices/                     # Follow-up material exercises
 │   ├── Note_app/                  # Base application integrating React Router
 │   ├── Note_app_UI_libraries/     # Interface refactor using Material UI (MUI)
 │   └── Note_app_styled_components/ # Alternative styling using Styled Components
-├── screenshots/                   # Screenshots for documentation
 ├── .gitignore                     # Git excluded files
 └── README.md                      # General documentation
 ```
@@ -101,10 +102,10 @@ npm run dev
 # Run Unit/Integration Tests (Inside frontend folder)
 npm run test
 
-# Run E2E Tests (Navigate to E2E-Test folder from Blog_app root)
-cd ../E2E-Test
+# Run E2E Tests (Open a THIRD new terminal, navigate to E2E-Test folder from Blog_app root)
+cd E2E-Test
 npm install
-npx playwright test
+npm run test
 ```
 
 ## 🧪 Testing Suite
@@ -130,7 +131,7 @@ npm run test
 Utilizing Playwright for full user flow simulation, ensuring authentication and core features work seamlessly together.
 
 > [!IMPORTANT]
-> Prerequisites: The backend must be running in test mode (npm run start:test) and the frontend in dev mode (npm run dev) before executing E2E tests.
+> Prerequisites: The backend must be running in test mode (`npm run start:test`) and the frontend in dev mode (`npm run dev`) before executing E2E tests.
 
 ```bash
 cd Part_05/Exercises/Blog_app/E2E-Test
@@ -141,7 +142,7 @@ npm run interfaz    # Interactive UI mode
 ## ⚙️ Environment Configuration
 This project requires a MongoDB database and JWT secret.
 
-1. Create a .env file in Part_05/Exercises/Blog_app/backend/.
+1. Create a `.env` file in Part_05/Exercises/Blog_app/backend/.
 
 2. Define variables:
 
