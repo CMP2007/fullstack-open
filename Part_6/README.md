@@ -6,8 +6,7 @@ A repository containing the solutions for Part 6 of the University of Helsinki c
 * **State Management:** Zustand and Redux Toolkit (implemented in separate, independent projects)
 * **Server State & Data Fetching:** TanStack Query (React Query)
 * **Frontend Core & Architecture:** React + Vite, React Router (inherited from Part 5 framework)
-* **UI Library:** MaterialUI (MUI)
-* **Testing Suite:** Vitest, React Testing Library, and Playwright (E2E)
+* **Testing Suite:** Vitest, React Testing Library
 
 ## 📖 About
 This repository is part of my learning journey in the Full Stack Open course. In this specific module, the work focuses on mastering advanced state management paradigms within React applications. By developing parallel versions of the same core application, the project demonstrates a deep dive into centralized state architectures—contrasting the structured boilerplate of Redux with the lightweight, store-based simplicity of Zustand. Additionally, separate projects isolate data synchronization using TanStack Query (React Query) to optimize asynchronous server state independently.
@@ -16,22 +15,6 @@ This repository is part of my learning journey in the Full Stack Open course. In
 > **Practice & Exercises Projects:** 🏛️ State Management Paradigms.
 >  This repository uses a structured folder system: the `Practices` folder contains the example projects developed during the course readings, while the `Exercises` folder contains the solutions for this level. Both folders contain multiple independent versions of their respective projects, allowing you to explore each solution implemented cleanly with Redux, Zustand, or TanStack Query.
 > The installation and setup processes are identical across both folders.
-
-## 📸 Preview
-
-### Login Screen
-![Login Screen](./Exercises/screenshots/screenshotslogin.jpg)
-
-*Initial view where users must authenticate to access the bloglist.*
-
-### Main Application
-![Project Preview](./Exercises/screenshots/project-demo.jpg)
-
-*Screenshot of the Bloglist application with the notification system.*
-
-![form Preview](./Exercises/screenshots/project-demo-formBLog.jpg)
-
-*Screenshot of the blog creation form.*
 
 ## 📋 Module Objectives / Key Features
 * Implementation of predictable state containers using Redux Architecture (actions, reducers, and store dispatching).
@@ -60,7 +43,6 @@ Completed entirely using the Redux ecosystem before the course migration.
 * [x] 6.14 - 6.19: Anecdotes and the Backend, steps 1-6 (Redux asynchronous actions)
 * [x] 6.20 - 6.24: React Query, Context API, steps 1-5
 
-
 ## 🧠 Overcome Challenges
 * **Shifting to Global State Paradigms:** Overcoming the steep learning curve of transitioning from React's native hooks (useState, useContext) to dedicated state managers, understanding how to lift state outside the component tree and manage a single source of truth properly.
 * **State Paradigm Shifting:** Adapting to the architectural differences between Redux's strict dispatch/reducer flow and Zustand's direct action-driven store mutations.
@@ -71,14 +53,14 @@ Completed entirely using the Redux ecosystem before the course migration.
 ## 📂 Project Structure
 ```text
 .
-├── Exercises/                       # # Course required exercises
+├── Exercises/                       # Course required exercises
 │   ├── query-anecdotes/             # Legacy: Server-state using TanStack Query
 │   ├── redux-anecdotes/             # Legacy: State management via Redux Toolkit
 │   ├── unicafe-redux/               # Legacy: Pure Redux state architecture
 │   └── zustand-exercises/           # Modern: New updated curriculum projects
 │       ├── unicafe-zustand/         # State management via Zustand
 │       ├── zustand-anecdotes/       # Store architecture using Zustand
-│       └── zustand-query-anecdotes/ # # Server-state management using TanStack Query
+│       └── zustand-query-anecdotes/ # Server-state management using TanStack Query
 ├── Practices/                       # Theory follow-up projects (Notes app & counters)
 │   ├── count-redux/                 # Legacy: Counter example using Redux
 │   ├── hook-counter/                # Legacy: Counter using native React patterns
@@ -87,14 +69,13 @@ Completed entirely using the Redux ecosystem before the course migration.
 │   └── zustand-practices/           # Modern: New updated curriculum projects
 │       ├── count-zustand/           # Counter example using Zustand
 │       ├── zustand-notas/           # Notes application using Zustand stores
-│       └── zustand-query-notes/     # # Server-state management using TanStack Query
-├── screenshots/                     # Application behavior captures
+│       └── zustand-query-notes/     # Server-state management using TanStack Query
 ├── .gitignore                       # Global git ignore configuration
 └── README.md                        # Project documentation
 ```
 
 ## 🚀 Installation
-Since each project in this module is a self-contained Frontend application that relies on a simulated REST API, you need to run both the development server and the mock backend  `json-server` simultaneously.
+Since each project in this module is a self-contained Frontend application that relies on a simulated REST API, you need to run both the development server and the mock backend `json-server` simultaneously.
 ```bash
 # 1. Navigate to the desired project directory (e.g., query-anecdotes)
 cd Part_06/Exercises/query-anecdotes
@@ -109,63 +90,39 @@ npm run server
 npm run dev
 ```
 ### General Workflow for Any Project
-The installation and execution process is identical across all directories within both `Exercises`/ and `Practices`/. To test any implementation:
+The installation and execution process is identical across all directories within both `Exercises/` and `Practices/`. To test any implementation:
 
-* cd into the specific project folder.
+* `cd` into the specific project folder.
 * Run `npm install` to populate `node_modules`.
 * Execute `npm run server` to initialize the database mock (usually running on `http://localhost:3001`).
 * Execute `npm run dev` to launch the React application interface.
 
-## 🧪 Testing Suite
-This project implements a comprehensive testing strategy across the entire stack.
+## 🧪 State & Component Integration Testing
+This module features a robust testing strategy focused on state architecture validation and UI integration using Vitest, React Testing Library, and User Event. The test suites verify both the predictability of pure state mutations and the UI's behavioral response to global store updates.
 
-### 1. Frontend: Unit & Integration Tests
-Powered by Vitest and React Testing Library.
+### Tested Implementations
+* `Exercises/unicafe-redux` & `Practices/Redux-notas`
+  * Pure Reducer Testing: Validates synchronous state transitions (like counter increments or note toggles) using `deepFreeze` to guarantee state immutability within the Redux architecture.
 
+* `Practices/zustand-practices/zustand-notas`
+  * Isolated Store Testing: Leverages `renderHook` and `act` to verify asynchronous store action triggers, state initializations, and client-side data filtering algorithms.
+
+* `Exercises/zustand-exercises/zustand-anecdotes`
+  * UI Integration & State Behavior: Combines hook isolation tests with structural component testing. It simulates real user interactions (typing filters, clicking vote buttons via `userEvent`) to ensure that components accurately reflect sorted database outputs and dynamically reflect state mutations.
+ 
+### How to Run Tests
+The testing execution workflow is identical across all these directories. To execute any test suite:
+
+* `cd` into the target project directory.
+* Run the test script:
+  
 ```bash
-cd Part_05/Exercises/Blog_app/frontend
+# Run the test suite via Vitest
 npm run test
-npm run coverage # For coverage report
 ```
-### 2. Backend: Integration Tests
-Verifies API endpoints and database logic using the native Node.js test runner and Supertest.
-
-```bash
-cd Part_05/Exercises/Blog_app/backend
-npm run test
-```
-
-### 3. End-to-End (E2E) Tests
-Utilizing Playwright for full user flow simulation, ensuring authentication and core features work seamlessly together.
-
-> [!IMPORTANT]
-> Prerequisites: The backend must be running in test mode (npm run start:test) and the frontend in dev mode (npm run dev) before executing E2E tests.
-
-```bash
-cd Part_05/Exercises/Blog_app/E2E-Test
-npm run test        # Headless mode
-npm run interfaz    # Interactive UI mode
-```
-
-## ⚙️ Environment Configuration
-This project requires a MongoDB database and JWT secret.
-
-1. Create a .env file in Part_05/Exercises/Blog_app/backend/.
-
-2. Define variables:
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-TEST_MONGODB_URI=your_test_mongodb_connection_string
-PORT=3003
-SECRET=your_jwt_secret_phrase
-```
-
-> [!TIP]
-> Using a separate TEST_MONGODB_URI is crucial. The test suite resets the database state before each execution to ensure reliability.
 
 ## 🔍 Project Notes
-This repository strictly follows the University of Helsinki conventions, including the use of npm for dependency management and testing scripts. The primary focus is the transition toward Test-Driven Development (TDD) and improving frontend architecture.
+This repository follows the University of Helsinki's strict curriculum standards, utilizing decentralized frontend configurations and specialized script workflows. The core focus of this module shifted from basic component assembly to architectural mastery: understanding state synchronization, comparing global management paradigms (Redux vs. Zustand), and decoupling server cache using TanStack Query.
 
 ---
 **Carlos Puche** - Self-Taught Full Stack Developer.
