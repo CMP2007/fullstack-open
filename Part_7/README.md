@@ -10,7 +10,7 @@ A folder containing the solutions for Part 7 of the University of Helsinki cours
 * **Tooling & DevOps:** Vite, esbuild, Concurrently, Axios, Cross-env
 
 ## 📖 About
-This module represents the culmination of the core web development track. The exercises extend the core Bloglist application into a multi-view system, using client-side routing to manage specific user dashboards and individual blog interactions. 
+This module represents the culmination of the core web development track. The exercises extend the core Bloglist application into a multi-view system, using client-side routing to manage specific user dashboards and individual blog interactions.
 
 State management was refactored using Zustand to achieve cleaner component state separation without Context boilerplate. Beyond application logic, this folder documents foundational concepts in build automation, comparing mainstream bundlers like Vite with lower-level compilation via esbuild, and configuring parallel runtime workflows in development using Concurrently.
 
@@ -20,23 +20,36 @@ State management was refactored using Zustand to achieve cleaner component state
 
 ## 📸 Application Interface Gallery
 
-Since this module transforms the monolithic view into a comprehensive dashboard with client-side routing, the user interface expands into specialized functional views.
-
 ### 1. Authentication Gate (Login)
 ![Login Screen](./Screenshots/login-view.jpg)
+
 *Initial Material UI login interface securing state contexts before routing initialization.*
 
 ### 2. Main Dashboard & Blogs View
 ![Main Dashboard](./Screenshots/dashboard-view.jpg)
+
 *The centralized view displays active blogs, navigation layouts, and the interactive creation form toggler.*
 
 ### 3. User Analytics Dashboard
 ![Users Directory](./Screenshots/users-analytics-view.jpg)
+
 *A dedicated route (`/users`) rendered to track user activity metrics and total blog contributions across the platform.*
 
 ### 4. Granular Blog & Commenting System
 ![Individual Blog View](./Screenshots/blog-details-view.jpg)
+
 *Parameterized dynamic view (`/blogs/:id`) displaying granular metadata alongside the asynchronous comment stream.*
+
+### 5. Specialized Blog Creation Form
+![Form Preview](./Screenshots/formBLog-view.jpg)
+
+*A dedicated, clean tab focused exclusively on the blog creation workflow and data input.*
+
+### 6. Dynamic Notification System
+![Notification Feedback](./Screenshots/notification-view.jpg)
+
+*Global Material UI feedback alert displaying real-time success confirmation, integrating with the app's notification context.*
+
 
 ## 📋 Module Objectives / Key Features
 * Implementation of decentralized, lightweight state management with Zustand to manage session notification contexts and global app state.
@@ -52,7 +65,7 @@ Since this module transforms the monolithic view into a comprehensive dashboard 
 * Practical understanding of modern frontend build tool chains, differentiating high-level frameworks like Vite from lower-level build configurations with esbuild.
 * Mastery of synchronized cross-directory development orchestration, abstracting complex backend/frontend execution boundaries under atomic npm scripts.
 * Ability to design scalable build and distribution flows, ensuring automated client compilation and seamless asset synchronization inside server-side static paths.
-  
+
 ## ✅ Completed Exercises
 
 ### Core Architecture & Custom Hooks
@@ -79,7 +92,7 @@ Since this module transforms the monolithic view into a comprehensive dashboard 
 * **Robust Route Protection & Parameter Tracking:** Handling asynchronous profile parameters and guarding unauthorized access across dynamic single-page application (SPA) views using React Router utilities.
 * **Low-Level Build Bundling & Configuration:** Overcoming the abstraction layer of modern setups by configuring and executing direct builds via **esbuild** CLI, managing local minification and asset compilation manually.
 * **Cross-Directory Asset Synchronization:** Designing automated build-and-migration pipeline scripts inside `package.json` to safely wipe legacy distributions (`rm -rf`) and pipe fresh production assets seamlessly across the frontend/backend divide.
-* 
+
 ## 📂 Project Structure
 
 ```text
@@ -148,7 +161,7 @@ npm run test
 ```
 
 ### 3. End-to-End (E2E) Tests
-Utilizing Playwright for full multi-view user flow simulation, verifying route access restrictions, blog generation, and the asynchronous commenting mechanism.
+Utilizing Playwright for full multi-view user flow simulation, verifying route access restrictions, blog generation.
 
 > [!IMPORTANT]
 > Prerequisites: The backend must be running in test mode (`npm run start:test`) and the frontend in dev mode (`npm run dev`) before executing E2E tests.
