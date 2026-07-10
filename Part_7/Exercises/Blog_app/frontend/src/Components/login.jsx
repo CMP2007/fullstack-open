@@ -4,7 +4,7 @@ import { TextField, Button } from '@mui/material'
 import { useUserActions } from '../stores/userStore'
 
 const Login = () => {
-  const { login } = useUserActions()
+  const { login, LoginAsGuest } = useUserActions()
   const username = useField('text')
   const password = useField('password')
 
@@ -17,11 +17,18 @@ const Login = () => {
     password.reset()
     navigate('/')
   }
+
+  const Guest = (event) => {
+    event.preventDefault()
+    LoginAsGuest()
+    navigate('/')
+  }
   return (
     <>
       <h1>log in to application</h1>
       <form onSubmit={loginSend}>
         <TextField
+          required
           label="username"
           variant="standard"
           value={username.value}
@@ -30,6 +37,7 @@ const Login = () => {
         />
         <br />
         <TextField
+          required
           label="password"
           variant="standard"
           type={password.type}
@@ -40,6 +48,14 @@ const Login = () => {
         <br />
         <Button type="submit" variant="contained" style={{ marginTop: 10 }}>
           login
+        </Button>
+        <Button
+          type="button"
+          onClick={Guest}
+          variant="contained"
+          style={{ marginTop: 10, marginLeft: 10 }}
+        >
+          Login as Guest
         </Button>
       </form>
     </>

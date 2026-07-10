@@ -17,6 +17,9 @@ const useUserStore = create((set) => ({
         const response = await LoginService.login({ password, username })
         userServices.saveUser(response)
         set((state) => ({ ...state, user: response }))
+        useNotificationStore
+          .getState()
+          .timeNotification('Logged in successfully.', 'success')
       } catch {
         useNotificationStore
           .getState()
@@ -26,6 +29,23 @@ const useUserStore = create((set) => ({
     closeSession: () => {
       userServices.removeUser()
       set((state) => ({ ...state, user: null }))
+    },
+    LoginAsGuest: async () => {
+      try {
+        const response = await LoginService.login({
+          password: 'GuestPass2026',
+          username: 'guest_recruiter',
+        })
+        userServices.saveUser(response)
+        set((state) => ({ ...state, user: response }))
+        useNotificationStore
+          .getState()
+          .timeNotification('Logged in successfully.', 'success')
+      } catch {
+        useNotificationStore
+          .getState()
+          .timeNotification('wrong username or password', 'error')
+      }
     },
   },
 }))

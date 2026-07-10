@@ -1,41 +1,73 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
-import {MemoryRouter, Routes, Route} from 'react-router-dom'
-import { beforeAll, beforeEach } from 'vitest'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { vi, describe, test, expect, beforeEach } from 'vitest'
 
-const blogs = [{
-  author: "Test",
-  id: "69a6e6b432dc572630t5s892",
-  likes: 0,
-  title: "Testing blog",
-  url: "test.com",
-  user:{
-    id: "6981751bd4e723e9863a1417",
-    name:"user",
-    username: "userApp"
-  } 
-}]
+const blogs = [
+  {
+    author: 'Test',
+    id: '69a6e6b432dc572630t5s892',
+    likes: 0,
+    title: 'Testing blog',
+    url: 'test.com',
+    user: {
+      id: '6981751bd4e723e9863a1417',
+      name: 'user',
+      username: 'userApp',
+    },
+  },
+]
+
+let mockCurrentUser = null
+
+vi.mock('../stores/blogStore', async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useBlogs: () => blogs,
+    useBlogsActions: () => ({
+      likeBlog: vi.fn(),
+      removeBlog: vi.fn(),
+    }),
+  }
+})
+
+vi.mock('../stores/userStore', async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    useUser: () => mockCurrentUser,
+  }
+})
+
+vi.mock('./CommentsForm', () => ({
+  default: () => <div data-testid="mock-comments-form" />,
+}))
+
+vi.mock('./CommentsList', () => ({
+  default: () => <div data-testid="mock-comments-list" />,
+}))
 
 const renderBlogs = (userData) => {
+  mockCurrentUser = userData
   const blogId = blogs[0].id
-  return (
-    render(
-      <MemoryRouter initialEntries={[`/blogs/${blogId}`]}>
-        <Routes>
-          <Route path='/blogs/:id' element={
-            <Blog blogs={blogs} user={userData}/>
-          }/>
-        </Routes>
-      </MemoryRouter>
-    )
+  return render(
+    <MemoryRouter initialEntries={[`/blogs/${blogId}`]}>
+      <Routes>
+        <Route path="/blogs/:id" element={<Blog />} />
+      </Routes>
+    </MemoryRouter>,
   )
 }
 
-describe('testing de la vista individual de los blogs', ()=>{
-  test('los elementos correctos se muestran a los usuarios no autenticados', ()=>{
+describe('testing de la vista individual de los blogs', () => {
+  beforeEach(() => {
+    mockCurrentUser = null
+  })
 
+  test('los elementos correctos se muestran a los usuarios no autenticados', () => {
     renderBlogs(null)
+
     const title = screen.getByText(/Testing blog/)
     expect(title).toBeDefined()
     const author = screen.getByText(/Added by: "userApp"/i)
@@ -45,9 +77,8 @@ describe('testing de la vista individual de los blogs', ()=>{
     expect(buttons).toHaveLength(0)
   })
 
-  test('el boton de like se muestra a los usuarios autenticados', ()=>{
-
-    renderBlogs({id: "6981751bd4e723e9863c589"})
+  test('el boton de like se muestra a los usuarios autenticados', () => {
+    renderBlogs({ id: '6981751bd4e723e9863c589' })
     const title = screen.getByText(/Testing blog/)
     expect(title).toBeDefined()
     const author = screen.getByText(/Added by: "userApp"/i)
@@ -60,8 +91,7 @@ describe('testing de la vista individual de los blogs', ()=>{
     expect(removeButton).toBeNull()
   })
 
-  test('los botones like y remove se muestra al usuario creador del blog', ()=>{
-
+  test('los botones like y remove se muestra al usuario creador del blog', () => {
     renderBlogs(blogs[0].user)
     const title = screen.getByText(/Testing blog/i)
     expect(title).toBeDefined()

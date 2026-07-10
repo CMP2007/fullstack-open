@@ -76,6 +76,7 @@ const Blog = () => {
                 variant="body2"
                 color="text.secondary"
                 sx={{ fontWeight: 'bold' }}
+                data-testid="likes-count"
               >
                 {blog.likes} likes
               </Typography>
@@ -91,9 +92,13 @@ const Blog = () => {
               {user ? hidenDelete() : null}
             </Box>
           </CardActions>
-          <h3>Comments</h3>
-          <CommentsForm />
-          <CommentsList />
+          {user ? (
+            <>
+              <h3>Comments</h3>
+              <CommentsForm />
+              <CommentsList />
+            </>
+          ) : null}
         </CardContent>
       </Card>
     )

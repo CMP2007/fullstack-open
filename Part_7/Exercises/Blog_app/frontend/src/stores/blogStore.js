@@ -30,7 +30,12 @@ const useBlogStore = create((set, get) => ({
       }
     },
     changeBlog: async (blog) => {
-      const userData = blog.user
+      console.log(blog)
+
+      const userData =
+        typeof blog.user === 'object'
+          ? blog.user.id || blog.user._id
+          : blog.user
       const newBlog = { ...blog, likes: blog.likes + 1, user: blog.user.id }
       try {
         const response = await Blogs.changeBlogs(newBlog)
@@ -40,6 +45,8 @@ const useBlogStore = create((set, get) => ({
             blog.id !== newBlog.id ? blog : userAndBlog,
           ),
         }))
+        console.log(response)
+
         useNotificationStore
           .getState()
           .timeNotification(
