@@ -1,3 +1,4 @@
+const path = require('path')
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
@@ -34,9 +35,10 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('dist'))
-  app.get('/*splat', (req, res) => {
-    res.sendFile(path.join(__dirname, '/dist/index.html'))
+  app.use(express.static(path.join(__dirname, 'dist')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
   })
 }
 
