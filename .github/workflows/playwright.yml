@@ -43,9 +43,20 @@ jobs:
       working-directory: Part_7/Exercises/Blog_app/E2E-Test
 
     - name: Run E2E Tests
-      run: npm run test
+      run: |
+        cd ../backend
+        NODE_ENV=test PORT=3001 TEST_MONGODB_URI="${{ secrets.TEST_MONGODB_URI }}" SECRET="${{ secrets.SECRET }}" npm run start:test &
+        
+        cd ../frontend
+        npm run dev -- --host 127.0.0.1 &
+        
+        npx wait-on http://127.0.0.1:5173 --timeout 60000
+        
+        cd ../E2E-Test
+        npm run test
       working-directory: Part_7/Exercises/Blog_app/E2E-Test
       env:
         NODE_ENV: test
+        PORT: 3001
         TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
         SECRET: ${{ secrets.SECRET }}
