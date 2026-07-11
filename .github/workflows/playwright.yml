@@ -9,25 +9,33 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18
+        node-version: 22
         cache: 'npm'
+        cache-dependency-path: 'Part_7/Exercices/Blog_app/package-lock.json'
 
-    - name: Install dependencies
+    - name: Install Monorepo Dependencies
       run: npm install
+      working-directory: Part_7/Exercices/Blog_app
+
+    - name: Install Playwright Dependencies
+      run: npm install
+      working-directory: Part_7/Exercices/Blog_app/E2E-Test
 
     - name: Install Playwright Browsers
-      run: npm exec playwright install --with-deps
+      run: npx playwright install --with-deps
+      working-directory: Part_7/Exercices/Blog_app/E2E-Test
 
-    - name: Start Backend and Frontend & Run Playwright tests
-      run: |
-        npm run test:e2e
+    - name: Start Servers & Run Playwright tests
+      run: npm run test
+      working-directory: Part_7/Exercices/Blog_app/E2E-Test
       env:
         NODE_ENV: test
         MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-        SECRET: ${{ secrets.SECRET }}
+        SECRET: ${{ secrets.TEST_SECRET }}
