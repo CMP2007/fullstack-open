@@ -30,8 +30,6 @@ const useBlogStore = create((set, get) => ({
       }
     },
     changeBlog: async (blog) => {
-      console.log(blog)
-
       const userData =
         typeof blog.user === 'object'
           ? blog.user.id || blog.user._id
@@ -45,7 +43,6 @@ const useBlogStore = create((set, get) => ({
             blog.id !== newBlog.id ? blog : userAndBlog,
           ),
         }))
-        console.log(response)
 
         useNotificationStore
           .getState()
