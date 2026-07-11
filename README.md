@@ -1,5 +1,7 @@
 # Full Stack Open - University of Helsinki (Specialized Track)
 
+![Playwright Tests](https://github.com/CMP2007/fullstack-open/actions/workflows/playwright.yml/badge.svg)
+
 A production-grade monorepository containing solutions and architectural deep dives for Parts 5, 6, and 7 of the University of Helsinki's Full Stack Open curriculum. This repository documents a structured transition from component assembly and local state patterns to advanced frontend tooling orchestration, global state management, and robust multi-view single-page architectures (SPAs).
 
 ## 🗂️ Monorepo Roadmap & Modules
