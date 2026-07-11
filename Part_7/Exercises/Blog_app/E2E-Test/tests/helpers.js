@@ -18,7 +18,7 @@ const createBlog = async (page, title, author, url) => {
 }
 
 const likedBLog = async (page, title, numberLikes) => {
-  await page.getByRole('link', { name: title }).click()
+  await page.getByRole('link', { name: title }).click({ force: true })
   await page.waitForURL(/\/blogs\//)
   await page.getByRole('button', { name: 'like' }).click()
 
