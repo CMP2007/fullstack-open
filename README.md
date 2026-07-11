@@ -13,12 +13,12 @@ A production-grade monorepository containing solutions and architectural deep di
 * Key Implementations: Token-based authentication, frontend unit/integration testing, and initial backend validation pipelines.
 * Core Stack: React, Node.js, Express, MongoDB, Vitest, Playwright.
 
-### 📂 [Part 6 — Advanced State Management & Data Fetching](./Part_06)
+### 📂 [Part 6 — Advanced State Management & Data Fetching](./Part_6)
 * Focus: Optimization of state delivery patterns and server-cache isolation.
 * Key Implementations: Migration from standard local React state paradigms into centralized architectures, comparing global state engines, and abstracting server status via dynamic query hooks.
 * Core Stack: Redux Toolkit, Zustand, TanStack Query (React Query), Axios.
 
-### 📂 [Part 7 — Advanced Tooling, Routing & Monolith Evolution](./Part_07)
+### 📂 [Part 7 — Advanced Tooling, Routing & Monolith Evolution](./Part_7)
 * Focus: Enterprise-level orchestration, compilation internals, and client-side routing.
 * Key Implementations: Monolith decomposition via declarative client-side views, complete lightweight state refactoring with Zustand, custom form life-cycle hooks, manual bundling via low-level CLIs, and cross-directory production asset synchronization.
 * Core Stack: React Router, Zustand, Material UI (MUI), esbuild, Concurrently.
@@ -30,6 +30,12 @@ A production-grade monorepository containing solutions and architectural deep di
 * **Backend & Database:** Node.js, Express, Mongoose, MongoDB Atlas
 * **Testing Architecture:** Playwright (E2E), Vitest, React Testing Library, Supertest
 * **Tooling & DevOps:** Vite, esbuild, Concurrently, Cross-env, Prettier
+
+## 🤖 Continuous Integration (CI) Pipeline
+This repository features a fully automated CI workflow configured via **GitHub Actions**, triggered on every `push` and `pull_request` to the main branch. The pipeline ensures codebase stability by orchestrating a strict verification sequence:
+* **Backend Integration & Unit Tests:** Execution of Node.js test suites against a dedicated test database environment using `node --test` and Supertest.
+* **Frontend Component Tests:** Isolated UI testing using Vitest and React Testing Library.
+* **End-to-End (E2E) Regression:** Full-stack workflow simulations (authentication, CRUD operations, animated UI sorting) across Chromium, Firefox, and WebKit engines using **Playwright**.
 
 ## 🚀 Navigation & Getting Started
 To explore, run, or test any particular solution or application within this monorepository:
