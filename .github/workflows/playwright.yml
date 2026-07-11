@@ -20,15 +20,15 @@ jobs:
 
     - name: Install Monorepo Dependencies
       run: npm install
-      # Corregido a Exercises con S:
       working-directory: Part_7/Exercises/Blog_app
 
     - name: Run Unit Tests
       run: npm run test
       working-directory: Part_7/Exercises/Blog_app
       env:
-        MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-        SECRET: ${{ secrets.TEST_SECRET }}
+        NODE_ENV: test
+        TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+        SECRET: ${{ secrets.SECRET }}
 
     - name: Install Playwright Dependencies
       run: npm install
@@ -43,5 +43,5 @@ jobs:
       working-directory: Part_7/Exercises/Blog_app/E2E-Test
       env:
         NODE_ENV: test
-        MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-        SECRET: ${{ secrets.TEST_SECRET }}
+        TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+        SECRET: ${{ secrets.SECRET }}
