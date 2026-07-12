@@ -4,6 +4,19 @@
 
 A production-grade monorepository containing solutions and architectural deep dives for Parts 5, 6, and 7 of the University of Helsinki's Full Stack Open curriculum. This repository documents a structured transition from component assembly and local state patterns to advanced frontend tooling orchestration, global state management, and robust multi-view single-page architectures (SPAs).
 
+## 🌐 Featured Live Demo
+
+The flagship application of this monorepository (**Blog App** from `Part_7`) is fully deployed and production-ready.
+
+* **⚡ Live Application:** [Explore the Blog App on Render](https://fullstack-open-blog-app-proyect.onrender.com)
+* **🔑 Instant Guest Access:**
+  - **Step 1:** Once the landing page loads, click on **"Login"** in the top navigation bar.
+  - **Step 2:** In the login form, click the **"Login as Guest"** button (next to the submit button).
+  - **Step 3:** You will be instantly authenticated to create blogs, leave comments, give likes, and manage your posts.
+
+> [!NOTE]
+> ⏳ **Note on Cold Starts:** The live demo is hosted on Render's free tier. If the application has been idle, the container spins down and may take **50–60 seconds** to wake up on your first request. Thank you for your patience!
+
 ## 🗂️ Monorepo Roadmap & Modules
 > [!NOTE]
 >Each module folder inside this repository functions as a structured workspace divided into two distinct scopes: `Exercises/` (storing the production-extended implementations like the unified `Blog_app`) and `Practices/` (storing standalone sandbox applications built while reading the curriculum material). Every module features its own explicit directory maps, completion ledgers, and testing guidelines. **Click on the module headers below to explore their dedicated README documents.**
@@ -41,7 +54,7 @@ This repository features a fully automated CI workflow configured via **GitHub A
 To explore, run, or test any particular solution or application within this monorepository:
 
 1. Clone the repository to your local machine.
-2. Navigate to the specific module folder depending on the architectural pattern you wish to evaluate (cd Part_05, cd Part_06, o cd Part_07).
+2. Navigate to the specific module folder depending on the architectural pattern you wish to evaluate (cd Part_05, cd Part_06, or cd Part_07).
 3. Follow the specialized 🚀 Installation and ⚙️ Environment Configuration guidelines detailed inside that specific directory's README file.
 
 ## 🧠 Architectural Evolution & Core Outcomes
