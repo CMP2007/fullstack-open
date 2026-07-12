@@ -16,6 +16,15 @@ This repository is part of my learning journey in the Full Stack Open course. In
 >  This repository uses a structured folder system: the `Practices` folder contains the example projects developed during the course readings, while the `Exercises` folder contains the solutions for this level. Both folders contain multiple independent versions of their respective projects, allowing you to explore each solution implemented cleanly with Redux, Zustand, or TanStack Query.
 > The installation and setup processes are identical across both folders.
 
+## 🚀 Project Evolution & Live Demo
+
+> [!IMPORTANT]
+> This module acts as a technical sandbox. Here, advanced state management tools like **Zustand** and **TanStack Query (React Query)** are mastered in isolation across multiple standalone projects.
+>
+> If you want to see how these distinct state architectures are unified into a single, production-ready full-stack application—complete with client-side routing, automated CI/CD pipelines, and a **Live Deployed Demo**—please navigate to the final module:
+>
+> 👉 **[Explore Part 7: Final Architecture & Live Demo](../Part_7)**
+
 ## 📋 Module Objectives / Key Features
 * Implementation of predictable state containers using Redux Architecture (actions, reducers, and store dispatching).
 * Creation of lightweight, decentralized state stores using Zustand to eliminate boilerplate code.

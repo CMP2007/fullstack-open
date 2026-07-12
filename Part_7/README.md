@@ -20,6 +20,19 @@ State management was refactored using Zustand to achieve cleaner component state
 > **Practice Project vs Exercises:**
 > Following the repository layout, the `Practices` directory stores minimalist applications exploring single concepts (such as direct esbuild configurations or standard Axios consumers), while the `Exercises` directory holds the production-extended `Blog_app` which features full script orchestration.
 
+## 🌐 Deployment & Live Demo
+
+This is the final, production-ready version of the Blog Application, fully integrating Zustand for state management, Material UI for the interface, and React Router for client-side navigation.
+
+* **⚡ Live Application:** [Explore the Blog App on Render](https://fullstack-open-blog-app-proyect.onrender.com)
+* **🔑 Instant Guest Access:**
+  - **Step 1:** Once the landing page loads, click on **"Login"** in the top navigation bar.
+  - **Step 2:** In the login form, click the **"Login as Guest"** button (next to the submit button).
+  - **Step 3:** You will be instantly authenticated to explore the full capabilities (create blogs, comment, leave likes, and safely delete your own posts).
+
+> [!NOTE]
+> ⏳ **Note on Cold Starts:** The live demo is hosted on Render's free tier. If the application has been idle, the container spins down and may take **50–60 seconds** to wake up on your first request. Thank you for your patience!
+
 ## 📸 Application Interface Gallery
 
 ### 1. Authentication Gate (Login)
@@ -115,7 +128,7 @@ _Global Material UI feedback alert displaying real-time success confirmation, in
 │   ├── 📂 Blog_app/                  # Unified multi-view blog application (Zustand + MUI)
 │   │   ├── 📁 backend/               # Express REST API (Mongoose & User Authentication)
 │   │   ├── 📁 frontend/              # Single-Page Application utilizing Material UI
-│   │   ├── 📁 y/                     # End-to-End automated testing suite (Playwright)
+│   │   ├── 📁 E2E-Test/              # End-to-End automated testing suite (Playwright)
 │   │   ├── 📄 .prettierrc            # Opinionated code formatting blueprint
 │   │   └── 📄 package.json           # Concurrently stack orchestration orchestrator
 │   └── 📂 routed-anecdotes/          # Single-Page Application using React Router
@@ -126,8 +139,8 @@ _Global Material UI feedback alert displaying real-time success confirmation, in
 │   ├── 📂 classComponents/           # Exploration of legacy React class-based architectures
 │   ├── 📂 customHooks/               # Sandbox for decoupled reusable logic isolation
 │   ├── 📂 internalEsbuild/           # Low-level compilation using pure esbuild bundles
-│   ├── 📂 useClaback/                # Performance optimization testing via useCallback
-│   ├── 📂 usedMemo/                  # Heavy computational caching tests via useMemo
+│   ├── 📂 useCallback/               # Performance optimization testing via useCallback
+│   ├── 📂 useMemo/                   # Heavy computational caching tests via useMemo
 │   └── 📁 node_modules/              # Automated local json-server dependency cache
 ├── 📂 Screenshots/                   # Visual documentation of multi-view UI layouts
 └── README.md
@@ -152,7 +165,7 @@ npm install
 npm run dev
 
 # Open a third terminal to configure the End-to-End test suite
-cd ../y
+cd ../E2E-Test
 npm install
 ```
 
@@ -180,11 +193,15 @@ npm run test
 ```
 
 ### 3. End-to-End (E2E) Tests
+<<<<<<< HEAD
 
 Utilizing Playwright for full multi-view user flow simulation, verifying route access restrictions, blog generation.
+=======
+Utilizing Playwright for full multi-view user flow simulation, verifying route access restrictions, and blog generation.
+>>>>>>> 5153334d5cce796ad28730e982feffe86d036f7f
 
-> [!IMPORTANT]
-> Prerequisites: The backend must be running in test mode (`npm run start:test`) and the frontend in dev mode (`npm run dev`) before executing E2E tests.
+> [!TIP]
+> **Automated Environment Setup:** Thanks to a custom `webServer` configuration inside Playwright, executing the test commands below will automatically spin up the backend (in test mode) and the frontend (in dev mode) simultaneously. You no longer need to start the servers manually in separate terminals!
 
 ```bash
 cd Part_07/Exercises/Blog_app/E2E-Test

@@ -15,6 +15,15 @@ This repository is part of my learning journey in the Full Stack Open course. In
 > This repository uses a simple folder structure: the `Practices` folder contains the example projects developed while reading the material, while the `Exercises` folder contains the projects used to complete the exercises for this level. The structure of both folders and the installation steps are identical.
 > In the event that a single project is used for practices or to complete the exercises throughout the level, its respective folder will only contain that single project.
 
+## 🚀 Project Evolution & Live Demo
+
+> [!IMPORTANT]
+> This folder represents an intermediate stage of the Blog application, focusing heavily on core React testing, routing, and UI implementation. 
+>
+> If you are looking for the final, production-ready version of this project—featuring advanced global state management (Zustand), automated CI/CD pipelines, and a **Live Deployed Demo**—please navigate to the final module:
+> 
+> 👉 **[Explore Part 7: Final Architecture & Live Demo](../Part_7)**
+
 ## 📸 Preview
 
 ### Login Screen
