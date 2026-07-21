@@ -171,4 +171,4 @@ This repository strictly follows the University of Helsinki conventions, includi
 ---
 **Carlos Puche** - Self-Taught Full Stack Developer.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-puche-0444b53ba/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/carlos-puche-dev/)
